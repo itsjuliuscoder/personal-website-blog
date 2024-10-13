@@ -1,8 +1,8 @@
 import { Document } from "@contentful/rich-text-types";
-import { EntrySkeletonType } from "contentful";
+import { EntrySkeletonType, Asset } from "contentful";
 
 
-export interface Asset {
+export interface Assets {
     title: string;
     description?: string;
     file: {
@@ -26,7 +26,7 @@ interface Metadata {
 }
 export interface Author {
   name: string;
-  picture: Asset;
+  picture: Assets;
 }
 // Define the fields for a blog post
 export interface BlogPostFields {
@@ -59,7 +59,40 @@ interface Excerpt {
 }
 
 interface Image {
-    fields: Asset;
+    fields: Assets;
+}
+
+interface PresentationFields {
+    title: string;
+    description: string;
+    file: Asset; // Assuming the file is an Asset type in Contentful
+    slug: string; // Added slug field
+    location: string;
+}
+
+interface PresentationDocument {
+    fields: {
+        file: {
+            url: string;
+            details: {
+            size: number;
+            };
+            fileName: string;
+            contentType: string;
+        };
+    } 
+}
+
+
+export interface Presentation extends EntrySkeletonType {
+    contentTypeId: 'talks';
+    title: string;
+    description: string;
+    document: PresentationDocument;
+    // file: PresentationDocument;
+    slug: string; // Added slug field
+    location: string;
+    
 }
 
 export type RichTextContent = Document | {
@@ -78,6 +111,7 @@ export interface BlogPost extends EntrySkeletonType<BlogPostFields> {
   coverImage: Image;
   contentTypeId: "post";
 }
+
 
 
 

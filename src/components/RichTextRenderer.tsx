@@ -14,8 +14,8 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
       [BLOCKS.HEADING_1]: (node: Block | Inline, children: React.ReactNode) => <h1 className="text-4xl font-bold mb-4 font-[family-name:var(--font-geist-playfair)]">{children}</h1>,
       [BLOCKS.HEADING_2]: (node: Block | Inline, children: React.ReactNode) => <h2 className="text-3xl font-bold mb-3 font-[family-name:var(--font-geist-playfair)]">{children}</h2>,
       [BLOCKS.HEADING_3]: (node: Block | Inline, children: React.ReactNode) => <h3 className="text-2xl font-bold mb-2 font-[family-name:var(--font-geist-playfair)]">{children}</h3>,
-      [BLOCKS.UL_LIST]: (node: Block | Inline, children: React.ReactNode) => <ul className="list-disc pl-5 mb-4 font-[family-name:var(--font-geist-poppins)]">{children}</ul>,
-      [BLOCKS.OL_LIST]: (node: Block | Inline, children: React.ReactNode) => <ol className="list-decimal pl-5 mb-4 font-[family-name:var(--font-geist-poppins)]">{children}</ol>,
+      [BLOCKS.UL_LIST]: (node: Block | Inline, children: React.ReactNode) => <ul className="list-disc pl-5 mb-2 font-[family-name:var(--font-geist-poppins)]">{children}</ul>,
+      [BLOCKS.OL_LIST]: (node: Block | Inline, children: React.ReactNode) => <ol className="list-decimal pl-5 mb-2 font-[family-name:var(--font-geist-poppins)]">{children}</ol>,
       [BLOCKS.LIST_ITEM]: (node: Block | Inline, children: React.ReactNode) => <li className="mb-1 font-[family-name:var(--font-geist-poppins)]">{children}</li>,
       [BLOCKS.QUOTE]: (node: Block | Inline, children: React.ReactNode) => <blockquote className="border-l-4 border-gray-300 pl-4 italic mb-4 font-[family-name:var(--font-geist-nunito)]">{children}</blockquote>,
       [INLINES.HYPERLINK]: (node: Block | Inline, children: React.ReactNode) => {

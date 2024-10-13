@@ -45,7 +45,7 @@ const Page = async () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-[5em]">
                 
             {posts.map((post) => (
-                <div className="text-black p-4" key={post.sys.id}>
+                <div className="text-black" key={post.sys.id}>
                     <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]"><Link href={`/stories/${post.slug}`}>{String(post.title)}</Link></h2>
                     <p className="text-[13px] italic font-[family-name:var(--font-geist-lora)]">{String(post.excerpt)}</p>
                     {/* <div dangerouslySetInnerHTML={{ __html: post.fields.body }} /> */}

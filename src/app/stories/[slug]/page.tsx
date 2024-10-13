@@ -27,6 +27,8 @@ export default async function Post({ params }: { params: { slug: string } }) {
     const { slug } = params;
     const post = await getPostBySlug(slug);
     
+    
+    
     if (!post) {
         return <h1>Post not found</h1>;
     }
