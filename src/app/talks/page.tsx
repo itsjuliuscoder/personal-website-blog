@@ -51,19 +51,19 @@ const Page = async () => {
                 <div className="md:w-2/5 mt-[3em]">
                     <ul className="flex list-none font-[family-name:var(--font-geist-nunito)]">
                         <li className="inline-block mr-12">
-                        <Link href="/" className="text-black flex">
-                        <FaArrowLeft className="mt-1 font-[100]" />&nbsp;Home
-                        </Link>
+                            <Link href="/" className="text-black flex">
+                            <FaArrowLeft className="mt-1 font-[100]" />&nbsp;Home
+                            </Link>
                         </li>
                         <li className="inline-block mr-12">
-                            <Link href="/projects" className="text-black">
-                            Projects
+                            <Link href="/stories" className="text-black">
+                                Stories
                             </Link>
                         </li>
                         <li className="inline-block">
-                        <Link href="/talks" className="text-black">
-                            Talks
-                        </Link>
+                            <Link href="/projects" className="text-black">
+                            Projects
+                            </Link>
                         </li>
                     </ul>
                 </div>
