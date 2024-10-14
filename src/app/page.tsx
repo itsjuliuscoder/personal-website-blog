@@ -9,15 +9,11 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 export default async function Home() {
   const posts: BlogPost[] = await getAllPosts(); // Fetch data directly
 
-  // console.log(`this is the posts ${JSON.stringify(posts[0])}`);
-
-  // console.log(`Total number of posts ${posts.length}`)
-
   return (
     <div className="p-4 md:p-[7em]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mb-4">  
             <div className="md:mt-[2em] mt-[1em] w-full md:w-3/5"> 
-                <h2 className="text-left text-lg font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Julius Olajumoke</h2>
+                <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Julius Olajumoke</h2>
                 <p className="text-left color-[#000] text-md text-[15px] md:text-[17px] font-[400] font-[family-name:(--font-geist-lora)] mt-[1em]">...intersection between technology and humanity.</p>  
             </div>
             <div className="w-full md:w-2/5 mt-[2em]"> 
@@ -46,6 +42,7 @@ export default async function Home() {
               crafting compelling stories, exploring new places, and honing my French-speaking skills.</p>
             <SocialMediaIcons />
         </div>
+        <hr className="block md:hidden border-t-2 border-gray-300 my-4 mt-[2em]" />
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-[5em]">
             
