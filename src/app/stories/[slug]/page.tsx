@@ -32,6 +32,8 @@ export default async function Post({ params }: { params: { slug: string } }) {
     if (!post) {
         return <h1>Post not found</h1>;
     }
+
+    console.log(`This is the post image https:${post.coverImage ? ((post.coverImage.fields.file.url)): ""}`)
    
     return (
         <div className="p-4 md:p-[7em]">
@@ -56,7 +58,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
                 <div className="prose max-w-none">
                     {post.coverImage && post.coverImage && (
                         <Image
-                        src={`https://${post.coverImage.fields.file.url}`}
+                        src={`https:${post.coverImage.fields.file.url}`}
                         alt={post.coverImage.fields.title} // Updated to access fields.title
                         width={800}
                         height={400}

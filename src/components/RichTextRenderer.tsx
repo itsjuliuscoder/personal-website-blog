@@ -27,7 +27,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
         
         return (
           <Image
-            src={`https://${file.url}`}
+            src={`https:${file.url}`}
             alt={description || 'Embedded asset'}
             width={width || 500}
             height={height || 300}
