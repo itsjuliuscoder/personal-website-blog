@@ -66,7 +66,7 @@ export default async function Home() {
             
             {/* Column 2 */}
             <div className="text-[24px]">
-              <h4 className="text-[22px] md:text-[28px] font-[800] font-[family-name:var(--font-geist-raleway)]">Projects</h4>
+              <h4 className="text-[22px] md:text-[25px] font-[900] font-[family-name:var(--font-geist-raleway)]">Projects</h4>
               <div className="mt-1">
                 <h5 className="text-[16px] font-[900] mt-2 font-[family-name:var(--font-geist-poppins)]"><Link href="/">Minified Expressjs</Link></h5>
                 <p className="text-[13px] font-[family-name:var(--font-geist-lora)] w-64">Gives weather updates of major cities around the world and provide travel advice to these cities</p>
@@ -81,7 +81,7 @@ export default async function Home() {
             
             {/* Column 3 */}
             <div className="text-[24px]">
-              <h4 className="text-[22px] md:text-[28px] font-[800] font-[family-name:var(--font-geist-raleway)]">Talks</h4>
+              <h4 className="text-[22px] md:text-[25px] font-[900] font-[family-name:var(--font-geist-raleway)]">Talks</h4>
               <div className="mt-1">
                 <span className="flex items-center gap-1 w-full">
                   <div className="text-[14px]"><FaMapMarkerAlt /> </div>
