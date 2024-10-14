@@ -1,5 +1,5 @@
 import { Document } from "@contentful/rich-text-types";
-import { EntrySkeletonType, Asset } from "contentful";
+import { EntrySkeletonType } from "contentful";
 
 
 export interface Assets {
@@ -62,13 +62,13 @@ interface Image {
     fields: Assets;
 }
 
-interface PresentationFields {
-    title: string;
-    description: string;
-    file: Asset; // Assuming the file is an Asset type in Contentful
-    slug: string; // Added slug field
-    location: string;
-}
+// interface PresentationFields {
+//     title: string;
+//     description: string;
+//     file: Asset; // Assuming the file is an Asset type in Contentful
+//     slug: string; // Added slug field
+//     location: string;
+// }
 
 interface PresentationDocument {
     fields: {

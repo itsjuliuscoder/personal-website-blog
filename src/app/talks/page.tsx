@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { getBlogPosts } from "@/lib/contentful/client";
 import { FaArrowLeft, FaMapMarkerAlt } from "react-icons/fa";
 import { Metadata } from "next";
 import { createClient, Asset, Entry, EntrySkeletonType } from "contentful";
@@ -41,7 +40,7 @@ const Page = async () => {
 
     // console.log(`This is the location ${JSON.stringify(presentations.items[0].fields.location)}`)
     
-    const posts = await getBlogPosts();
+   
     // console.log(`Posts goes here ${JSON.stringify(posts)}`)
     return(
         <div className="p-4 md:p-[7em]">
