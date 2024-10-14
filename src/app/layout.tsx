@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Nunito, Montserrat, Lora, Poppins, Raleway  } from "next/font/google";
+import { Playfair_Display, Nunito, Montserrat, Lora, Poppins, Raleway, Roboto_Mono  } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
 const geistPlayfair = Playfair_Display({
   weight: ['400', '800'],
   variable: "--font-geist-playfair",
+  subsets: ["latin"]
+});
+
+const geistRobotoMono = Roboto_Mono({
+  weight: ['400'],
+  variable: "--font-geist-roboto-mono",
   subsets: ["latin"]
 });
 
@@ -74,6 +80,7 @@ export default function RootLayout({
           ${geistLora.variable}
           ${geistPoppins.variable}
           ${geistRaleway.variable}
+          ${geistRobotoMono.variable}
           antialiased`
         }
       >

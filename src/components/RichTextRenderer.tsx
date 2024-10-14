@@ -1,5 +1,5 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, INLINES, Document, Block, Inline } from '@contentful/rich-text-types';
+import { BLOCKS, INLINES, Document, Block, Inline, MARKS, Text } from '@contentful/rich-text-types';
 import Image from 'next/image';
 import { RichTextContent } from '@/types/contentful';
 
@@ -9,8 +9,37 @@ interface RichTextRendererProps {
 
 const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
   const options = {
+    renderMark: {
+      [MARKS.CODE]: (text: React.ReactNode) => {
+        return (
+          <pre className="bg-gray-900 p-6 rounded-lg overflow-x-auto shadow-md">
+            <code className="text-white text-sm font-mono">{text}</code>
+          </pre>
+        );
+      }
+    },
     renderNode: {
-      [BLOCKS.PARAGRAPH]: (node: Block | Inline, children: React.ReactNode) => <p className="mb-4 font-[family-name:var(--font-geist-poppins)]">{children}</p>,
+      [BLOCKS.PARAGRAPH]: (node: Block | Inline) => {
+        // TypeScript knows the structure of Contentful Rich Text nodes
+        const isCode = node.content.some((contentItem) => {
+          // Type guard for Text nodes
+          if ((contentItem as Text).marks) {
+            return (contentItem as Text).marks.some((mark) => mark.type === MARKS.CODE);
+          }
+          return false;
+        });
+  
+        if (isCode) {
+          
+          return (
+            <pre className='bg-gray-900 p-2 overflow-x-auto shadow-lg'>
+              <code className="text-white text-sm font-[family-name:var(--font-geist-roboto-mono)]">{(node.content[0] as Text).value}</code>
+            </pre>
+          );
+        }
+  
+        return <p>{(node.content[0] as Text).value}</p>;
+      },
       [BLOCKS.HEADING_1]: (node: Block | Inline, children: React.ReactNode) => <h1 className="text-4xl font-bold mb-4 font-[family-name:var(--font-geist-playfair)]">{children}</h1>,
       [BLOCKS.HEADING_2]: (node: Block | Inline, children: React.ReactNode) => <h2 className="text-3xl font-bold mb-3 font-[family-name:var(--font-geist-playfair)]">{children}</h2>,
       [BLOCKS.HEADING_3]: (node: Block | Inline, children: React.ReactNode) => <h3 className="text-2xl font-bold mb-2 font-[family-name:var(--font-geist-playfair)]">{children}</h3>,
@@ -37,11 +66,12 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
       },
       [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
         const entry = (node as Block).data.target;
+        const codeContent = (node as Block).data.target.fields.code;
         switch (entry.sys.contentType.sys.id) {
           case 'codeBlock':
             return (
-              <pre className="bg-gray-100 p-4 rounded">
-                <code>{entry.fields.code}</code>
+              <pre className="bg-gray-900 p-6 rounded-lg overflow-x-auto shadow-md">
+                <code className="text-white text-sm font-mono">{codeContent}</code>
               </pre>
             );
           case 'videoEmbed':
