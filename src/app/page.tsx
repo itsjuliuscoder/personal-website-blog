@@ -17,7 +17,7 @@ export default async function Home() {
                 <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Julius Olajumoke</h2>
                 <p className="text-left color-[#000] text-md text-[15px] md:text-[17px] font-[400] font-[family-name:(--font-geist-lora)] mt-[1em]">...intersection between technology and humanity.</p>  
             </div>
-            <div className="w-full lg:w-2/5 mt-[2em]"> 
+            <div className="w-full lg:w-2/5 mt-[4em]"> 
               <ul className="list-none font-[family-name:var(--font-geist-nunito)]">
                 <li className="inline-block mr-12">
                   <Link href="/stories" className="text-black">
