@@ -11,12 +11,13 @@ export default async function Home() {
 
   return (
     <div className="p-4 md:p-[7em]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mb-4">  
-            <div className="md:mt-[2em] mt-[1em] w-full md:w-3/5"> 
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mb-4">   */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full mb-4">
+            <div className="lg:mt-[2em] mt-[1em] w-full lg:w-3/5"> 
                 <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Julius Olajumoke</h2>
                 <p className="text-left color-[#000] text-md text-[15px] md:text-[17px] font-[400] font-[family-name:(--font-geist-lora)] mt-[1em]">...intersection between technology and humanity.</p>  
             </div>
-            <div className="w-full md:w-2/5 mt-[2em]"> 
+            <div className="w-full lg:w-2/5 mt-[2em]"> 
               <ul className="list-none font-[family-name:var(--font-geist-nunito)]">
                 <li className="inline-block mr-12">
                   <Link href="/stories" className="text-black">
@@ -38,14 +39,14 @@ export default async function Home() {
         </div>
         <div className="mt-6 mb-3">
             <h5 className="font-[family-name:var(--font-geist-lora)] text-[14px]">About Me</h5>
-            <p className="text-[18px] md:text-[22px] font-[family-name:var(--font-geist-lora)] font-[500] w-full md:w-2/5">I’m a Software Engineer based in Lagos, Nigeria, with a passion for writing software, 
-              crafting compelling stories, exploring new places, and honing my French-speaking skills.</p>
+            <p className="text-[18px] lg:text-[22px] font-[family-name:var(--font-geist-lora)] font-[500] w-full lg:w-2/5">
+              I’m a Software Engineer based in Lagos, Nigeria, with a passion for writing software, crafting compelling stories, exploring new places, and honing my French-speaking skills.
+            </p>
             <SocialMediaIcons />
         </div>
-        <hr className="block md:hidden border-t-2 border-gray-300 my-4 mt-[2em]" />
+        <hr className="block lg:hidden border-t-2 border-gray-300 my-4 mt-[2em]" />
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-[5em]">
-            
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-[5em]">
             <div className="text-left">
               <h4 className="text-[22px] md:text-[25px] font-[900] font-[family-name:var(--font-geist-raleway)]">Stories</h4>
               {posts.map((post) => (
