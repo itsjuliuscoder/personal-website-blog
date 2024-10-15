@@ -38,7 +38,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
           );
         }
   
-        return <p>{(node.content[0] as Text).value}</p>;
+        return <p className='p-1 text-md font-[family-name:var(--font-geist-raleway)]'>{(node.content[0] as Text).value}</p>;
       },
       [BLOCKS.HEADING_1]: (node: Block | Inline, children: React.ReactNode) => <h1 className="text-4xl font-bold mb-4 font-[family-name:var(--font-geist-playfair)]">{children}</h1>,
       [BLOCKS.HEADING_2]: (node: Block | Inline, children: React.ReactNode) => <h2 className="text-3xl font-bold mb-3 font-[family-name:var(--font-geist-playfair)]">{children}</h2>,
