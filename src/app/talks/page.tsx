@@ -48,11 +48,16 @@ const Page = async () => {
                 <div className="md:mt-[2em] mt-[1em] w-full md:w-3/5"> 
                     <h2 className="text-left text-lg font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[38px]">Talks</h2>
                 </div>
-                <div className="md:w-2/5 mt-[3em]">
+                <div className="md:w-3/5 mt-[3em]">
                     <ul className="flex list-none font-[family-name:var(--font-geist-nunito)]">
                         <li className="inline-block mr-12">
                             <Link href="/" className="text-black flex">
                             <FaArrowLeft className="mt-1 font-[100]" />&nbsp;Home
+                            </Link>
+                        </li>
+                        <li className="inline-block mr-12">
+                            <Link href="/knowledge-stack" className="text-black">
+                                Knowledge Stack
                             </Link>
                         </li>
                         <li className="inline-block mr-12">

@@ -20,14 +20,19 @@ const Page = async () => {
         <div className="p-4 md:p-[7em]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mb-4">
                 <div className="md:mt-[2em] mt-[1em] w-full md:w-3/5"> 
-                    <h2 className="text-left text-lg font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[38px]">Stories</h2>
+                    <h2 className="text-left text-lg font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[38px]">Knowledge Stack</h2>
                 </div>
-                <div className="md:w-2/5 mt-[3em]">
+                <div className="md:w-3/5 mt-[3em]">
                     <ul className="flex list-none font-[family-name:var(--font-geist-nunito)]">
                         <li className="inline-block mr-12">
-                        <Link href="/" className="text-black flex">
-                        <FaArrowLeft className="mt-1 font-[100]" />&nbsp;Home
-                        </Link>
+                            <Link href="/" className="text-black flex">
+                                <FaArrowLeft className="mt-1 font-[100]" />&nbsp;Home
+                            </Link>
+                        </li>
+                        <li className="inline-block mr-12">
+                            <Link href="/knowledge-stack" className="text-black">
+                                Knowledge Stack
+                            </Link>
                         </li>
                         <li className="inline-block mr-12">
                             <Link href="/projects" className="text-black">

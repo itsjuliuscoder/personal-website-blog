@@ -20,7 +20,7 @@ const SocialMediaIcons = () => {
         </a>
       </li>
       <li className="inline-block">
-        <a href="mailto:devcalled@gmail.com" aria-label="Mail">
+        <a href="mailto:devcalledjulius@gmail.com" aria-label="Mail">
           <FaEnvelope className="text-2xl hover:text-blue-500" />
         </a>
       </li>

@@ -1,5 +1,5 @@
 import { createClient, EntryCollection } from 'contentful';
-import { BlogPost, Presentation } from '../types/contentful';
+import { BlogPost, Presentation, Knowledge } from '../types/contentful';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID!,
@@ -17,7 +17,19 @@ export async function getAllPosts(): Promise<BlogPost[]> {
       ...item.fields,  // This includes slug, title, etc.
       sys: item.sys,  // Include sys metadata like id, createdAt, etc.
     } as unknown as BlogPost));
-  }
+}
+
+export async function getAllKnowledgeStacks(): Promise<Knowledge[]> {
+  const response: EntryCollection<Knowledge> = await client.getEntries<Knowledge>({
+    content_type: 'knowledge',
+    order: ['-sys.createdAt'],
+  });
+  
+  return response.items.map(item => ({
+    ...item.fields,  // This includes slug, title, etc.
+    sys: item.sys,  // Include sys metadata like id, createdAt, etc.
+  } as unknown as Knowledge));
+}
   
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {

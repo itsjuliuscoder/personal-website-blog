@@ -62,13 +62,6 @@ interface Image {
     fields: Assets;
 }
 
-// interface PresentationFields {
-//     title: string;
-//     description: string;
-//     file: Asset; // Assuming the file is an Asset type in Contentful
-//     slug: string; // Added slug field
-//     location: string;
-// }
 
 interface PresentationDocument {
     fields: {
@@ -83,10 +76,27 @@ interface PresentationDocument {
     } 
 }
 
+export interface KnowledgeFields {
+  title: string;
+  description: string;
+  source: RichTextContent[];
+}
+
+export interface Knowledge extends EntrySkeletonType {
+  contentTypeId: "knowledge";
+  sys: Sys; // Metadata such as ID, timestamps
+  title: string;
+  description: string;
+  type: string;
+  url: string;
+  source: Document;
+}
+
 
 export interface Presentation extends EntrySkeletonType {
     contentTypeId: 'talks';
     title: string;
+    sys: Sys; // Metadata such as ID, timestamps
     description: string;
     document: PresentationDocument;
     // file: PresentationDocument;
@@ -95,10 +105,16 @@ export interface Presentation extends EntrySkeletonType {
     
 }
 
-export type RichTextContent = Document | {
+export type RichTextSource = Document | {
     nodeType: string;
     data: Record<string, unknown>;
     content: RichTextContent[];
+};
+
+export type RichTextContent = Document | {
+  nodeType: string;
+  data: Record<string, unknown>;
+  content: RichTextContent[];
 };
 
 // The BlogPost type with fields and sys metadata

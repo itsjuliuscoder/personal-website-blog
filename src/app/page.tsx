@@ -12,19 +12,24 @@ export default async function Home() {
   return (
     <div className="p-4 md:p-[7em]">
         {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mb-4">   */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full mb-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full mb-4">
             <div className="lg:mt-[2em] mt-[1em] w-full lg:w-3/5"> 
                 <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Julius Olajumoke</h2>
                 <p className="text-left color-[#000] text-md text-[15px] md:text-[17px] font-[400] font-[family-name:(--font-geist-lora)] mt-[1em]">...intersection between technology and humanity.</p>  
             </div>
-            <div className="w-full lg:w-2/5 mt-[4em]"> 
+            <div className="w-full lg:w-3/5 mt-[4em]"> 
               <ul className="list-none font-[family-name:var(--font-geist-nunito)]">
-                <li className="inline-block mr-12">
+                <li className="inline-block mr-8">
+                  <Link href="/knowledge-stack" className="text-black">
+                    Knowledge Stack
+                  </Link>
+                </li>
+                <li className="inline-block mr-8">
                   <Link href="/stories" className="text-black">
                     Writing
                   </Link>
                 </li>
-                <li className="inline-block mr-12">
+                <li className="inline-block mr-8">
                     <Link href="/project" className="text-black">
                       Projects
                     </Link>
