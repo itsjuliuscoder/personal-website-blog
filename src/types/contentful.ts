@@ -1,5 +1,5 @@
 import { Document, } from "@contentful/rich-text-types";
-import { EntrySkeletonType, Asset } from "contentful";
+import { EntrySkeletonType } from "contentful";
 
 
 export interface Assets {
@@ -74,11 +74,11 @@ export interface Presentation extends EntrySkeletonType {
   contentTypeId: 'talks';
   title: string;
   description: string;
-  file: Asset; // Assuming the file is an Asset type in Contentful
   slug: string; // Added slug field
   location: string;
   document: {
-    sys: Sys;
+    sys: Sys,
+    file: Assets
   }
 }
 
