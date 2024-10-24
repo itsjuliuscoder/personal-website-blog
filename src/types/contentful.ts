@@ -1,5 +1,5 @@
-import { Document } from "@contentful/rich-text-types";
-import { EntrySkeletonType } from "contentful";
+import { Document, } from "@contentful/rich-text-types";
+import { EntrySkeletonType, Asset } from "contentful";
 
 
 export interface Assets {
@@ -62,18 +62,24 @@ interface Image {
     fields: Assets;
 }
 
+// interface PresentationFields {
+//   title: string;
+//   description: string;
+//   file: Asset; // Assuming the file is an Asset type in Contentful
+//   slug: string; // Added slug field
+//   location: string;
+// }
 
-interface PresentationDocument {
-    fields: {
-        file: {
-            url: string;
-            details: {
-            size: number;
-            };
-            fileName: string;
-            contentType: string;
-        };
-    } 
+export interface Presentation extends EntrySkeletonType {
+  contentTypeId: 'talks';
+  title: string;
+  description: string;
+  file: Asset; // Assuming the file is an Asset type in Contentful
+  slug: string; // Added slug field
+  location: string;
+  document: {
+    sys: Sys;
+  }
 }
 
 export interface KnowledgeFields {
@@ -82,6 +88,12 @@ export interface KnowledgeFields {
   source: RichTextContent[];
 }
 
+export interface Projects {
+  title: string;
+  slug: string;
+  excerpt: Document;
+  source: string;
+}; 
 export interface Knowledge extends EntrySkeletonType {
   contentTypeId: "knowledge";
   sys: Sys; // Metadata such as ID, timestamps
@@ -92,18 +104,17 @@ export interface Knowledge extends EntrySkeletonType {
   source: Document;
 }
 
-
-export interface Presentation extends EntrySkeletonType {
-    contentTypeId: 'talks';
-    title: string;
-    sys: Sys; // Metadata such as ID, timestamps
-    description: string;
-    document: PresentationDocument;
-    // file: PresentationDocument;
-    slug: string; // Added slug field
-    location: string;
-    
+export interface Projects extends EntrySkeletonType {
+  contentTypeId: "projects";
+  sys: Sys; // Metadata such as ID, timestamps
+  title: string;
+  slug: string;
+  excerpt: Document;
+  source: string;
 }
+
+
+
 
 export type RichTextSource = Document | {
     nodeType: string;

@@ -1,13 +1,16 @@
 // app/page.tsx
 import Link from "next/link";
 import moment from 'moment';
-import { getAllPosts } from '../lib/api'; // Your data-fetching function
-import { BlogPost } from '../types/contentful';
+import { getAllPosts, getAllPresentation } from '../lib/api'; // Your data-fetching function
+import { BlogPost, Presentation } from '../types/contentful';
 import SocialMediaIcons from '@/components/SocialMediaIcons';
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 export default async function Home() {
   const posts: BlogPost[] = await getAllPosts(); // Fetch data directly
+  const presentations: Presentation[] = await getAllPresentation();
+
+  console.log(`Posts here ${JSON.stringify(posts)}`)
 
   return (
     <div className="p-4 md:p-[7em]">
@@ -15,7 +18,7 @@ export default async function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full mb-4">
             <div className="lg:mt-[2em] mt-[1em] w-full lg:w-3/5"> 
                 <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Julius Olajumoke</h2>
-                <p className="text-left color-[#000] text-md text-[15px] md:text-[17px] font-[400] font-[family-name:(--font-geist-lora)] mt-[1em]">...intersection between technology and humanity.</p>  
+                <p className="text-left color-[#000] text-md text-[15px] md:text-[17px] font-[400] font-[family-name:(--font-geist-lora)] mt-[12px]">...intersection between technology and humanity.</p>  
             </div>
             <div className="w-full lg:w-3/5 mt-[4em]"> 
               <ul className="list-none font-[family-name:var(--font-geist-nunito)]">
@@ -60,7 +63,7 @@ export default async function Home() {
                     <Link href={`/stories/${post.slug}`}>{String(post.title)}</Link>
                   </h5>
                   <h6 className="text-[13px] italic font-[family-name:var(--font-geist-lora)]">
-                    {String(moment(post.sys.createdAt).format('MMMM Do YYYY'))}
+                    {String(moment(post.sys.createdAt).format('MMMM Do, YYYY'))}
                   </h6>
                 </div>
               ))}
@@ -88,14 +91,22 @@ export default async function Home() {
             {/* Column 3 */}
             <div className="text-[24px]">
               <h4 className="text-[22px] md:text-[25px] font-[900] font-[family-name:var(--font-geist-raleway)]">Talks</h4>
-              <div className="mt-1">
-                <span className="flex items-center gap-1 w-full">
-                  <div className="text-[14px]"><FaMapMarkerAlt /> </div>
-                  <div className="text-[13px] font-[family-name:var(--font-geist-lora)]">Google AI Lab, Accra Ghana.</div>
-                </span>
-                <h5 className="text-[16px] font-[900] mt-2 font-[family-name:var(--font-geist-poppins)]"><Link href="/">AI: The Death of Startups?</Link></h5>
-                <h6 className="text-[13px] italic font-[family-name:var(--font-geist-lora)]">November 11, 2024</h6>
-              </div>
+              {presentations.map((pres) => {
+                // const pres = presentation as Entry<Presentation>; // Type assertion
+                return (
+                    <div className="text-black" key={pres.document.sys.id}>
+                        <div className="text-[13px] font-[family-name:var(--font-geist-lora)]"></div>
+                        <span className="flex items-center gap-1 w-full">
+                            <div className="text-[14px]"><FaMapMarkerAlt /> </div>
+                            <div className="text-[13px] font-[family-name:var(--font-geist-lora)]">{String(pres.location)}</div>
+                        </span>
+                        <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]">
+                            <Link href={`/talks/${pres.slug}`}>{String(pres.title)}</Link>
+                        </h2>
+                        <p className="text-[13px] font-[family-name:var(--font-geist-lora)]">{String(moment(pres.document.sys.createdAt).format('MMMM Do, YYYY'))}</p>
+                    </div>
+                );
+            })}
               
             </div>
         </div>

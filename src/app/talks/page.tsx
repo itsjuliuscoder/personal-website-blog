@@ -40,8 +40,6 @@ const Page = async () => {
 
     // console.log(`This is the location ${JSON.stringify(presentations.items[0].fields.location)}`)
     
-   
-    // console.log(`Posts goes here ${JSON.stringify(posts)}`)
     return(
         <div className="p-4 md:p-[7em]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mb-4">

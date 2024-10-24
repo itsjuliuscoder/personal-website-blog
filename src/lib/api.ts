@@ -1,5 +1,5 @@
 import { createClient, EntryCollection } from 'contentful';
-import { BlogPost, Presentation, Knowledge } from '../types/contentful';
+import { BlogPost, Presentation, Knowledge, Projects } from '../types/contentful';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID!,
@@ -64,4 +64,13 @@ export async function getPresentationSlug(slug: string): Promise<Presentation | 
     // console.log(`this is the presentation response ${JSON.stringify(presentation)}`)
 
     return presentation.items[0] ? (presentation.items[0].fields as unknown as Presentation) : null; // Access fields from the first item
+}
+
+
+export async function getAllProjects(): Promise<Projects[]>{
+  const projects = await client.getEntries<Projects>({
+    content_type: 'projects', // Changed from 'talks' to 'presentation'
+});
+
+return projects.items.map(item => item.fields as unknown as Projects);
 }
