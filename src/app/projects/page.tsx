@@ -39,8 +39,8 @@ const Page = async () => {
                             </Link>
                         </li>
                         <li className="inline-block">
-                            <Link href="/projects" className="text-black">
-                            Projects
+                            <Link href="/talks" className="text-black">
+                            Talks
                             </Link>
                         </li>
                     </ul>

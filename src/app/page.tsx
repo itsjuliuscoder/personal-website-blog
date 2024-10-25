@@ -33,7 +33,7 @@ export default async function Home() {
                   </Link>
                 </li>
                 <li className="inline-block mr-8">
-                    <Link href="/project" className="text-black">
+                    <Link href="/projects" className="text-black">
                       Projects
                     </Link>
                 </li>
