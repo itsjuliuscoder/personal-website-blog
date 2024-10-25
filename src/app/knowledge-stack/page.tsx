@@ -45,7 +45,7 @@ const  Page = async () => {
                 {knowledge.map((post) => (
                     <ul key={post.sys.id} className="list-disc pl-5 space-y-2">
                         <li className="text-black-500 xt-[16px] font-[family-name:var(--font-geist-poppins)]">
-                            {post.type == "link" ? <Link href="/" className="underline">{post.title}</Link> : <h4 className="text-[16px] font-[family-name:var(--font-geist-poppins)]"> {post.title}</h4> }
+                            {post.type == "link" ? <Link href={`${post.url}`} className="underline" legacyBehavior><a target="_blank" className="underline" rel="noopener noreferrer">{post.title}</a></Link> : <h4 className="text-[16px] font-[family-name:var(--font-geist-poppins)]"> {post.title}</h4> }
                         </li>
                     </ul>
                 ))}
