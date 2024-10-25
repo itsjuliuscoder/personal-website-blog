@@ -10,7 +10,7 @@ export default async function Home() {
   const posts: BlogPost[] = await getAllPosts(); // Fetch data directly
   const presentations: Presentation[] = await getAllPresentation();
   const projects: Projects[] = await getAllProjects();
-  // console.log(`Posts here ${JSON.stringify(projects)}`)
+  console.log(`Posts here ${JSON.stringify(posts)}`)
 
   return (
     <div className="p-4 md:p-[7em]">
