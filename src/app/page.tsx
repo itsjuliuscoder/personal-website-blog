@@ -1,16 +1,16 @@
 // app/page.tsx
 import Link from "next/link";
 import moment from 'moment';
-import { getAllPosts, getAllPresentation } from '../lib/api'; // Your data-fetching function
-import { BlogPost, Presentation } from '../types/contentful';
+import { getAllPosts, getAllPresentation, getAllProjects } from '../lib/api'; // Your data-fetching function
+import { BlogPost, Presentation, Projects } from '../types/contentful';
 import SocialMediaIcons from '@/components/SocialMediaIcons';
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 export default async function Home() {
   const posts: BlogPost[] = await getAllPosts(); // Fetch data directly
   const presentations: Presentation[] = await getAllPresentation();
-
-  // console.log(`Posts here ${JSON.stringify(posts)}`)
+  const projects: Projects[] = await getAllProjects();
+  // console.log(`Posts here ${JSON.stringify(projects)}`)
 
   return (
     <div className="p-4 md:p-[7em]">
@@ -76,16 +76,13 @@ export default async function Home() {
             {/* Column 2 */}
             <div className="text-[24px]">
               <h4 className="text-[22px] md:text-[25px] font-[900] font-[family-name:var(--font-geist-raleway)]">Projects</h4>
-              <div className="mt-1">
-                <h5 className="text-[16px] font-[900] mt-2 font-[family-name:var(--font-geist-poppins)]"><Link href="/">Minified Expressjs</Link></h5>
-                <p className="text-[13px] font-[family-name:var(--font-geist-lora)] w-64">A minified web framework for building restful apis and more.</p>
-                <h6 className="text-[13px] font-[600] font-[family-name:var(--font-geist-lora)]">Link and Source</h6>
+              {projects.map((project) => (
+              <div key={project.slug} className="mt-1">
+                <h5 className="text-[16px] font-[900] mt-2 font-[family-name:var(--font-geist-poppins)]"><Link href="/">{project.title}</Link></h5>
+                <p className="text-[13px] font-[family-name:var(--font-geist-lora)] w-64">{String(project.excerpt)}</p>
+                <h6 className="text-[13px] font-[600] font-[family-name:var(--font-geist-lora)]"><Link href={`${project.source}`} legacyBehavior><a target="_blank" rel="noopener noreferrer">Link or Source</a></Link></h6>
               </div>
-              <div className="mt-1">
-                <h5 className="text-[16px] font-[900] mt-2 font-[family-name:var(--font-geist-poppins)]"><Link href="/">Realtime Weather App</Link></h5>
-                <p className="text-[13px] font-[family-name:var(--font-geist-lora)] w-64">Gives weather updates of major cities around the world and provide travel advice to these cities</p>
-                <h6 className="text-[13px] font-[600] font-[family-name:var(--font-geist-lora)]">Link and Source</h6>
-              </div>
+              ))}
             </div>
             
             {/* Column 3 */}
