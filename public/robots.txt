@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://juliusolajumoke.com
+
+# Sitemaps
+Sitemap: https://juliusolajumoke.com/sitemap.xml
