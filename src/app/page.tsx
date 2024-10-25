@@ -10,7 +10,7 @@ export default async function Home() {
   const posts: BlogPost[] = await getAllPosts(); // Fetch data directly
   const presentations: Presentation[] = await getAllPresentation();
   const projects: Projects[] = await getAllProjects();
-  console.log(`Posts here ${JSON.stringify(posts)}`)
+  // console.log(`Posts here ${JSON.stringify(presentations)}`)
 
   return (
     <div className="p-4 md:p-[7em]">
@@ -100,7 +100,8 @@ export default async function Home() {
                         <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]">
                             <Link href={`/talks/${pres.slug}`}>{String(pres.title)}</Link>
                         </h2>
-                        <p className="text-[13px] font-[family-name:var(--font-geist-lora)]">{String(moment(pres.document.sys.createdAt).format('MMMM Do, YYYY'))}</p>
+                        <p className="text-[13px] font-[family-name:var(--font-geist-lora)]">{String(pres.description)}</p>
+                        <p className="text-[12px] font-[800] font-[family-name:var(--font-geist-lora)]">{String(moment(pres.eventDate).format('MMMM Do, YYYY'))}</p>
                     </div>
                 );
             })}

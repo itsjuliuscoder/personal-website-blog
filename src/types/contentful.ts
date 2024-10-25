@@ -80,6 +80,7 @@ export interface Presentation extends EntrySkeletonType {
     sys: Sys,
     file: Assets
   }
+  eventDate: string;
 }
 
 export interface KnowledgeFields {
