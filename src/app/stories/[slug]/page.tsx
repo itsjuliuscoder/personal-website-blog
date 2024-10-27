@@ -27,7 +27,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
         return <h1>Post not found</h1>;
     }
 
-    console.log(`This is the post image https:${post.coverImage ? ((post.coverImage.fields.file.url)): ""}`)
+    // console.log(`This is the post image https:${post.coverImage ? ((post.coverImage.fields.file.url)): ""}`)
    
     return (
         <div className="p-4 md:px-[7em] md:py-[5em]">

@@ -40,9 +40,9 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
   
         return <p className='p-1 text-md font-[family-name:var(--font-geist-raleway)]'>{(node.content[0] as Text).value}</p>;
       },
-      [BLOCKS.HEADING_1]: (node: Block | Inline, children: React.ReactNode) => <h1 className="text-4xl font-bold mb-4 font-[family-name:var(--font-geist-poppins)]">{children}</h1>,
-      [BLOCKS.HEADING_2]: (node: Block | Inline, children: React.ReactNode) => <h2 className="text-3xl font-bold mb-3 font-[family-name:var(--font-geist-poppins)]">{children}</h2>,
-      [BLOCKS.HEADING_3]: (node: Block | Inline, children: React.ReactNode) => <h3 className="text-2xl font-bold mb-2 font-[family-name:var(--font-geist-poppins)]">{children}</h3>,
+      [BLOCKS.HEADING_1]: (node: Block | Inline, children: React.ReactNode) => <h1 className="text-4xl mt-2 font-bold mb-4 font-[family-name:var(--font-geist-poppins)]">{children}</h1>,
+      [BLOCKS.HEADING_2]: (node: Block | Inline, children: React.ReactNode) => <h2 className="text-3xl mt-2 font-bold mb-3 font-[family-name:var(--font-geist-poppins)]">{children}</h2>,
+      [BLOCKS.HEADING_3]: (node: Block | Inline, children: React.ReactNode) => <h3 className="text-2xl mt-[2em] font-bold mb-2 font-[family-name:var(--font-geist-poppins)]">{children}</h3>,
       [BLOCKS.HEADING_4]: (node: Block | Inline, children: React.ReactNode) => <h4 className="text-2xl font-bold mb-2 font-[family-name:var(--font-geist-poppins)]">{children}</h4>,
       [BLOCKS.UL_LIST]: (node: Block | Inline, children: React.ReactNode) => <ul className="list-disc pl-5 mb-2 font-[family-name:var(--font-geist-poppins)]">{children}</ul>,
       [BLOCKS.OL_LIST]: (node: Block | Inline, children: React.ReactNode) => <ol className="list-decimal pl-5 mb-2 font-[family-name:var(--font-geist-poppins)]">{children}</ol>,
