@@ -69,9 +69,9 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
           <Image
             src={`https:${file.url}`}
             alt={description || 'Embedded asset'}
-            width={width || 500}
-            height={height || 300}
-            className="mb-4"
+            width={width || 1000}
+            height={height || 500}
+            className="mt-4 mb-4"
           />
         );
       },
