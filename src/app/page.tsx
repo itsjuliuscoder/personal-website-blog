@@ -29,7 +29,7 @@ export default async function Home() {
                 </li>
                 <li className="inline-block mr-8">
                   <Link href="/stories" className="text-black">
-                    Writing
+                    Stories
                   </Link>
                 </li>
                 <li className="inline-block mr-8">
@@ -48,7 +48,7 @@ export default async function Home() {
         <div className="mt-6 mb-3">
             <h5 className="font-[family-name:var(--font-geist-lora)] text-[14px]">About Me</h5>
             <p className="text-[18px] lg:text-[22px] font-[family-name:var(--font-geist-lora)] font-[500] w-full lg:w-2/5">
-              I’m a Software Engineer based in Lagos, Nigeria, with a passion for writing software, crafting compelling stories, exploring new places, and honing my French-speaking skills.
+              I’m a Software Engineer based in Lagos, Nigeria, with a passion for Stories software, crafting compelling stories, exploring new places, and honing my French-speaking skills.
             </p>
             <SocialMediaIcons />
         </div>
@@ -100,7 +100,7 @@ export default async function Home() {
                         <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]">
                             <Link href={`/talks/${pres.slug}`}>{String(pres.title)}</Link>
                         </h2>
-                        <p className="text-[13px] font-[family-name:var(--font-geist-lora)]">{String(pres.description)}</p>
+                        {/* <p className="text-[13px] font-[family-name:var(--font-geist-lora)]">{String(pres.description)}</p> */}
                         <p className="text-[12px] font-[800] font-[family-name:var(--font-geist-lora)]">{String(moment(pres.eventDate).format('MMMM Do, YYYY'))}</p>
                     </div>
                 );

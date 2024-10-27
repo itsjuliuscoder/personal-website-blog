@@ -7,6 +7,11 @@ interface RichTextRendererProps {
   content: RichTextContent;
 }
 
+const CUSTOM_MARKS = {
+  SUPERSCRIPT: 'superscript',
+  SUBSCRIPT: 'subscript',
+};
+
 const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
   const options = {
     renderMark: {
@@ -16,7 +21,12 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
             <code className="text-white text-sm font-mono">{text}</code>
           </pre>
         );
-      }
+      }, 
+      [CUSTOM_MARKS.SUPERSCRIPT]: (text: React.ReactNode) => {return(<sup>{text}</sup>)},
+      [CUSTOM_MARKS.SUBSCRIPT]: (text: React.ReactNode) => {return(<sub>{text}</sub>)},
+      [MARKS.BOLD]: (text: React.ReactNode) => {return(<strong>{text}</strong>)},
+      [MARKS.ITALIC]: (text: React.ReactNode) => {return(<em>{text}</em>)},
+      [MARKS.UNDERLINE]: (text: React.ReactNode) => {return(<u>{text}</u>)},
     },
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node: Block | Inline) => {

@@ -27,6 +27,8 @@ export default async function Post({ params }: { params: { slug: string } }) {
         return <h1>Post not found</h1>;
     }
 
+    // console.log(`This is the post ${JSON.stringify(post)} here!`)
+
     // console.log(`This is the post image https:${post.coverImage ? ((post.coverImage.fields.file.url)): ""}`)
    
     return (
