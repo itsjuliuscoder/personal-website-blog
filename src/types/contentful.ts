@@ -83,7 +83,7 @@ export interface Presentation extends EntrySkeletonType {
   location: string;
   document: {
     sys: Sys,
-    file: Assets
+    fields: Assets
   }
   eventDate: string;
 }

@@ -22,14 +22,16 @@ export default async function Talks({ params }: { params: { slug: string } }) {
         return <h1>Presentation not found</h1>;
     }
 
-    const { title, document } = presentation.fields; // Adjusted destructuring
+    const { title, document } = presentation; // Adjusted destructuring
+
+    // console.log(`This is my presentation ${JSON.stringify(presentation)}`)
 
 
     if (!document) {
         return <h1>File not found</h1>; // Handle case where file is undefined
     }
 
-    const fileUrl = document.file.url; // Now safe to access url
+    const fileUrl = document.fields.file.url; // Now safe to access url
 
     return (
         // ... existing code ...
