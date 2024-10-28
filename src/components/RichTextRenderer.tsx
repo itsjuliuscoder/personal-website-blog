@@ -1,6 +1,7 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES, Document, Block, Inline, MARKS, Text } from '@contentful/rich-text-types';
 import Image from 'next/image';
+import Link from 'next/link';
 import { RichTextContent } from '@/types/contentful';
 
 interface RichTextRendererProps {
@@ -60,7 +61,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
       [BLOCKS.QUOTE]: (node: Block | Inline, children: React.ReactNode) => <blockquote className="border-l-4 border-gray-300 pl-4 italic mb-4 font-[family-name:var(--font-geist-nunito)]">{children}</blockquote>,
       [INLINES.HYPERLINK]: (node: Block | Inline, children: React.ReactNode) => {
         const { uri } = (node as Inline).data;
-        return <a href={uri} className="text-blue-500 hover:underline">{children}</a>;
+        return <Link href={uri} legacyBehavior><a target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">{children}</a></Link>;
       },
       [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
         const { file, height, width, description } = (node as Block).data.target.fields;

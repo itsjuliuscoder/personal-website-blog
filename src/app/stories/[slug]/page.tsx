@@ -4,6 +4,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { getPostBySlug } from "@/lib/api";
 import RichTextRenderer from "@/components/RichTextRenderer";
 import Image from 'next/image';
+import moment from 'moment'
 
 
 // Update to use a function for metadata generation
@@ -27,7 +28,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
         return <h1>Post not found</h1>;
     }
 
-    // console.log(`This is the post ${JSON.stringify(post)} here!`)
+    // console.log(`This is the post ${JSON.stringify(post.author.sys.createdAt)} here!`)
 
     // console.log(`This is the post image https:${post.coverImage ? ((post.coverImage.fields.file.url)): ""}`)
    
@@ -56,9 +57,10 @@ export default async function Post({ params }: { params: { slug: string } }) {
                                 className="mb-8 w-full object-cover"
                             />
                         )}
-                        <h2 className="mb-[1em] text-left text-lg font-[600] font-[family-name:var(--font-geist-poppins)] leading-[38px] text-[42px] md:text-[42px]">
+                        <h2 className="text-left text-lg font-[600] font-[family-name:var(--font-geist-poppins)] leading-[38px] text-[42px] md:text-[42px]">
                             {String(post.title)}
                         </h2>
+                        <p className="mb-4 mt-2">{String(moment(post.author.sys.createdAt).format('MMMM Do, YYYY'))}</p>
                         <RichTextRenderer content={post.content} /> 
                     </div>
                 </div>

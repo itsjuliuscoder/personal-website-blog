@@ -33,7 +33,12 @@ export interface BlogPostFields {
   title: string;
   slug: string; // Slug is defined here
   content: Document;
-  author: Author;
+  author: {
+    sys: {
+      createdAt: string, 
+      updatedAt: string
+    }
+  };
   coverImage: Image;
   date: string;
   excerpt: string;
@@ -134,6 +139,12 @@ export interface BlogPost extends EntrySkeletonType<BlogPostFields> {
   sys: Sys; // Metadata such as ID, timestamps
   slug: Slug;
   title: Title;
+  author: {
+    sys: {
+      createdAt: string, 
+      updatedAt: string
+    }
+  };
   excerpt: Excerpt;
   content: RichTextContent;
   coverImage: Image;
