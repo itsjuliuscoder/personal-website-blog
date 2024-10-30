@@ -10,7 +10,7 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
 
     return {
         title: presentation ? String(presentation.title) : "Default Title", // Use post title or a default
-        description: presentation ? String(presentation.title) : "Default description", // Use post description or a default
+        description: presentation ? String(presentation.description) : "Default description", // Use post description or a default
     };
 };
 
