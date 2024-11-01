@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getBlogPosts } from "@/lib/contentful/client";
+import { getAllProjects } from "@/lib/api";
 import { FaArrowLeft } from "react-icons/fa";
 import { Metadata } from "next";
 
@@ -13,7 +13,7 @@ export const generateMetadata = (): Metadata => { // Fixed syntax
 };
 
 const Page = async () => {
-    const posts = await getBlogPosts();
+    const projects = await getAllProjects();
     // console.log(`Posts goes here ${JSON.stringify(posts)}`)
     return(
         <div className="p-4 md:p-[7em]">
@@ -48,10 +48,11 @@ const Page = async () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-[5em]">
                 
-            {posts.map((post) => (
-                <div className="text-black p-4" key={post.sys.id}>
-                    <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]"><Link href={`/stories/${post.fields.slug}`}>{String(post.fields.title)}</Link></h2>
-                    <p className="text-[13px] italic font-[family-name:var(--font-geist-lora)]">{String(post.fields.excerpt)}</p>
+            {projects.map((project) => (
+                <div className="text-black p-4" key={project.slug}>
+                    <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]">{String(project.title)}</h2>
+                    <p className="text-[13px] italic font-[family-name:var(--font-geist-lora)]">{String(project.excerpt)}</p>
+                    <h6 className="text-[13px] font-[600] font-[family-name:var(--font-geist-lora)]"><Link href={`${project.source}`} legacyBehavior><a target="_blank" rel="noopener noreferrer">Link or Source</a></Link></h6>
                     {/* <div dangerouslySetInnerHTML={{ __html: post.fields.body }} /> */}
                 </div>
             ))}
