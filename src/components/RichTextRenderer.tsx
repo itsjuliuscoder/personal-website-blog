@@ -1,5 +1,5 @@
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, INLINES, Document, Block, Inline, MARKS, Text } from '@contentful/rich-text-types';
+import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, INLINES, Document, Block, Inline, MARKS } from '@contentful/rich-text-types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RichTextContent } from '@/types/contentful';
@@ -14,12 +14,12 @@ const CUSTOM_MARKS = {
 };
 
 const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
-  const options = {
+  const options: Options = {
     renderMark: {
       [MARKS.CODE]: (text: React.ReactNode) => {
         return (
           <pre className="bg-gray-900 p-6 rounded-lg overflow-x-auto shadow-md">
-            <code className="text-white text-sm font-mono">{text}</code>
+            <code className="text-white text-sm font-[family-name:var(--font-geist-roboto-mono)]">{text}</code>
           </pre>
         );
       }, 
@@ -30,27 +30,9 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
       [MARKS.UNDERLINE]: (text: React.ReactNode) => {return(<u>{text}</u>)},
     },
     renderNode: {
-      [BLOCKS.PARAGRAPH]: (node: Block | Inline) => {
-        // TypeScript knows the structure of Contentful Rich Text nodes
-        const isCode = node.content.some((contentItem) => {
-          // Type guard for Text nodes
-          if ((contentItem as Text).marks) {
-            return (contentItem as Text).marks.some((mark) => mark.type === MARKS.CODE);
-          }
-          return false;
-        });
-  
-        if (isCode) {
-          
-          return (
-            <pre className='bg-gray-900 p-2 overflow-x-auto shadow-lg'>
-              <code className="text-white text-sm font-[family-name:var(--font-geist-roboto-mono)]">{(node.content[0] as Text).value}</code>
-            </pre>
-          );
-        }
-  
-        return <p className='p-1 text-md font-[family-name:var(--font-geist-raleway)]'>{(node.content[0] as Text).value}</p>;
-      },
+      [BLOCKS.PARAGRAPH]: (node: Block | Inline, children: React.ReactNode) => (
+        <p className="p-1 text-md font-[family-name:var(--font-geist-raleway)]">{children}</p>
+      ),
       [BLOCKS.HEADING_1]: (node: Block | Inline, children: React.ReactNode) => <h1 className="text-4xl mt-2 font-bold mb-4 font-[family-name:var(--font-geist-poppins)]">{children}</h1>,
       [BLOCKS.HEADING_2]: (node: Block | Inline, children: React.ReactNode) => <h2 className="text-3xl mt-2 font-bold mb-3 font-[family-name:var(--font-geist-poppins)]">{children}</h2>,
       [BLOCKS.HEADING_3]: (node: Block | Inline, children: React.ReactNode) => <h3 className="text-2xl mt-[2em] font-bold mb-2 font-[family-name:var(--font-geist-poppins)]">{children}</h3>,
@@ -60,8 +42,14 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
       [BLOCKS.LIST_ITEM]: (node: Block | Inline, children: React.ReactNode) => <li className="mb-1 font-[family-name:var(--font-geist-poppins)]">{children}</li>,
       [BLOCKS.QUOTE]: (node: Block | Inline, children: React.ReactNode) => <blockquote className="border-l-4 border-gray-300 pl-4 italic mb-4 font-[family-name:var(--font-geist-nunito)]">{children}</blockquote>,
       [INLINES.HYPERLINK]: (node: Block | Inline, children: React.ReactNode) => {
-        const { uri } = (node as Inline).data;
-        return <Link href={uri} legacyBehavior><a target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">{children}</a></Link>;
+        const uri = node.data.uri as string;
+        return (
+          <Link href={uri} legacyBehavior>
+            <a target="_blank" rel="noopener noreferrer" className="text-black-500 underline font-bold">
+              {children}
+            </a>
+          </Link>
+        );
       },
       [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
         const { file, height, width, description } = (node as Block).data.target.fields;
@@ -100,9 +88,8 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
           default:
             return null;
         }
-      }
+      },
     },
-    
   };
 
   return <>{documentToReactComponents(content as Document, options)}</>;
