@@ -47,7 +47,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
             {/* Adjust the layout for mobile to be full width */}
             <div className="grid md:w-1/2 gap-4 mt-[5em]">
                 <div className="flex">
-                    <div className="prose max-w-none w-full">
+                    <div className="p-4 max-w-full mx-auto">
                         {post.coverImage && (
                             <Image
                                 src={`https:${post.coverImage.fields.file.url}`}
