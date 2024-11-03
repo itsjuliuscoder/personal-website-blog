@@ -1,6 +1,9 @@
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, Document, Block, Inline, MARKS } from '@contentful/rich-text-types';
 import { RichTextContent } from '@/types/contentful';
+// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+// import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import Image from "next/image";
 
 interface RichTextRendererProps {
   content: RichTextContent;
@@ -46,6 +49,20 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
       [BLOCKS.UL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
         <ul className="list-disc pl-5 mb-2 font-[family-name:var(--font-geist-poppins)] break-words">{children}</ul>
       ),
+      [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
+        const { file, title } = node.data.target.fields;
+        return (
+          <div className="my-4">
+            <Image
+              src={`https:${file.url}`}
+              alt={title}
+              width={file.details.image.width}
+              height={file.details.image.height}
+              className="w-full h-auto"
+            />
+          </div>
+        );
+      },
       [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
         const entry = (node as Block).data.target;
         const codeContent = (node as Block).data.target.fields.code;
