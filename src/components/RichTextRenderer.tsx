@@ -50,7 +50,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
         <ul className="list-disc pl-5 mb-2 font-[family-name:var(--font-geist-poppins)] break-words">{children}</ul>
       ),
       [BLOCKS.OL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
-        <ol className="list-decimal pl-5 mb-2 mt-[1em] font-[family-name:var(--font-geist-poppins)] break-words">{children}</ol>
+        <ol className="list-decimal pl-5 mb-2 mt-[1em] pt-[1em] font-[family-name:var(--font-geist-poppins)] break-words">{children}</ol>
       ),
       [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
         const { file, title } = node.data.target.fields;
