@@ -32,7 +32,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
     },
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node: Block | Inline, children: React.ReactNode) => (
-        <p className="text-md font-[family-name:var(--font-geist-raleway)]">{children}</p>
+        <p className="pt-2 mt-1 text-md font-[family-name:var(--font-geist-poppins)]">{children}</p>
       ),
       [BLOCKS.HEADING_1]: (node: Block | Inline, children: React.ReactNode) => (
         <h1 className="text-4xl mt-2 font-bold mb-4 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h1>
