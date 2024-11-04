@@ -60,7 +60,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
                         <h2 className="text-left text-lg font-[600] font-[family-name:var(--font-geist-poppins)] leading-[38px] text-[42px] md:text-[42px]">
                             {String(post.title)}
                         </h2>
-                        <p className="mb-4 mt-2">{String(moment(post.author.sys.createdAt).format('MMMM Do, YYYY'))}</p>
+                        <p className="mb-4 mt-2 font-[800] font-[family-name:var(--font-geist-lora)]">{String(moment(post.author.sys.createdAt).format('MMMM Do, YYYY'))}</p>
                         <RichTextRenderer content={post.content} /> 
                     </div>
                 </div>
