@@ -8,7 +8,7 @@ import { Metadata } from "next";
 export const generateMetadata = (): Metadata => { // Fixed syntax
     return {
         title: "Projects | Julius Olajumoke", 
-        description: "Default description",
+        description: "Projects by Julius Olajumoke",
     }
 };
 

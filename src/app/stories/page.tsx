@@ -9,7 +9,7 @@ import { BlogPost } from '../../types/contentful';
 export const generateMetadata = (): Metadata => { // Fixed syntax
     return {
         title: "Stories | Julius Olajumoke", 
-        description: "Default description",
+        description: "Stories by Julius Olajumoke",
     }
 };
 

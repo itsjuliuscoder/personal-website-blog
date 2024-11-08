@@ -2,6 +2,16 @@ import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import { getAllKnowledgeStacks } from "@/lib/api";
 import { Knowledge } from "@/types/contentful";
+import { Metadata } from "next";
+
+
+// Update to use a function for metadata generation
+export const generateMetadata = (): Metadata => { // Fixed syntax
+    return {
+        title: "Knowledge Stack | Julius Olajumoke", 
+        description: "My Knowledge Repository by Julius Olajumoke",
+    }
+};
 
 const  Page = async () => {
 

@@ -21,7 +21,7 @@ interface Presentation extends EntrySkeletonType {
 export const generateMetadata = (): Metadata => { // Fixed syntax
     return {
         title: "Talks | Julius Olajumoke", 
-        description: "List of all my tech talks.",
+        description: "Tech Talks by Julius Olajumoke",
     }
 };
 
