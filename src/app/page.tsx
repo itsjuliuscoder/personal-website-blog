@@ -10,7 +10,9 @@ export default async function Home() {
   const posts: BlogPost[] = await getAllPosts(); // Fetch data directly
   const presentations: Presentation[] = await getAllPresentation();
   const projects: Projects[] = await getAllProjects();
-  // console.log(`Posts here ${JSON.stringify(posts)}`)
+  
+  
+  //console.log(`Posts here ${JSON.stringify(posts)}`)
 
   return (
     <div className="p-4 md:p-[7em]">
@@ -60,11 +62,11 @@ export default async function Home() {
               {posts.map((post) => (
                 <div key={post.sys.id} className="mt-[1em]">
                   <h5 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]">
-                    <Link href={`/stories/${post.slug}`}>{String(post.title)}</Link>
+                    {post && post.type == "article" ? <Link href={`/stories/${post.slug}`}>{String(post.title)}</Link> : <Link href={`${post.link}`} legacyBehavior><a target="_blank" rel="noopener noreferrer">{String(post.title)}</a></Link>  } 
                   </h5>
                   <h6 className="text-[13px] italic font-[family-name:var(--font-geist-lora)]">
                     {String(moment(post.sys.createdAt).format('MMMM Do, YYYY'))}
-                  </h6>
+                  </h6> 
                 </div>
               ))}
               

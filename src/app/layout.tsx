@@ -1,7 +1,11 @@
+// "use client";
 import type { Metadata } from "next";
+// import { useEffect } from "react";
+// import { usePathname } from "next/navigation";
 import { Playfair_Display, Nunito, Montserrat, Lora, Poppins, Raleway, Roboto_Mono  } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+// import { initGA, logPageView } from "@/lib/gtag";
 
 const geistPlayfair = Playfair_Display({
   weight: ['400', '800'],
@@ -68,6 +72,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+//   const pathname = usePathname();
+
+//   useEffect(() => {
+//     // Initialize Google Analytics on first load
+//     initGA();
+
+//     // Log page view on route change
+//     if (pathname) {
+//         logPageView(pathname);
+//     }
+// }, [pathname]);
+
   return (
     <html lang="en">
       <body

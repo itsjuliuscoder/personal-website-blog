@@ -42,6 +42,8 @@ export interface BlogPostFields {
   coverImage: Image;
   date: string;
   excerpt: string;
+  type: string;
+  link: string;
 }
 
 // Define the sys metadata
@@ -146,6 +148,8 @@ export interface BlogPost extends EntrySkeletonType<BlogPostFields> {
     }
   };
   excerpt: Excerpt;
+  type: string;
+  link: string;
   content: RichTextContent;
   coverImage: Image;
   contentTypeId: "post";
