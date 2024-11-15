@@ -10,13 +10,9 @@ export default async function Home() {
   const posts: BlogPost[] = await getAllPosts(); // Fetch data directly
   const presentations: Presentation[] = await getAllPresentation();
   const projects: Projects[] = await getAllProjects();
-  
-  
-  //console.log(`Posts here ${JSON.stringify(posts)}`)
 
   return (
     <div className="p-4 md:p-[7em]">
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mb-4">   */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full mb-4">
             <div className="lg:mt-[2em] mt-[1em] w-full lg:w-3/5"> 
                 <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Julius Olajumoke</h2>
@@ -73,7 +69,6 @@ export default async function Home() {
               <div className="mt-[1em] text-[14px] font-[family-name:var(--font-geist-lora)]"><Link href="/stories">...view all {`${posts.length}`} stories.</Link></div>
               
             </div>
-            
             
             {/* Column 2 */}
             <div className="text-[24px]">
