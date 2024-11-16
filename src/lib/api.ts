@@ -1,6 +1,8 @@
 import { createClient, EntryCollection } from 'contentful';
 import { BlogPost, Presentation, Knowledge, Projects } from '../types/contentful';
 
+export const revalidate = 120; // Revalidate every 120 seconds
+
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID!,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,

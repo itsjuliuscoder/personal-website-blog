@@ -5,6 +5,8 @@ import { Knowledge } from "@/types/contentful";
 import { Metadata } from "next";
 
 
+export const revalidate = 120; // Revalidate every 120 seconds
+
 // Update to use a function for metadata generation
 export const generateMetadata = (): Metadata => { // Fixed syntax
     return {

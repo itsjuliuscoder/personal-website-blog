@@ -6,6 +6,8 @@ import { BlogPost, Presentation, Projects } from '../types/contentful';
 import SocialMediaIcons from '@/components/SocialMediaIcons';
 import { FaMapMarkerAlt } from "react-icons/fa";
 
+export const revalidate = 120; // Revalidate every 120 seconds
+
 export default async function Home() {
   const posts: BlogPost[] = await getAllPosts(); // Fetch data directly
   const presentations: Presentation[] = await getAllPresentation();
