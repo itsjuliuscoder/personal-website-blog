@@ -97,7 +97,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
       },
       [INLINES.HYPERLINK]: (node: Block | Inline, children: React.ReactNode) => (
         <Link href={node.data.uri} legacyBehavior>
-          <a target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+          <a target="_blank" rel="noopener noreferrer" className="text-gray-800 underline">
             {children}
           </a>
         </Link>
