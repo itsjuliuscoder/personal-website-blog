@@ -1,9 +1,10 @@
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, Document, Block, Inline, MARKS } from '@contentful/rich-text-types';
+import { BLOCKS, Document, Block, Inline, MARKS, INLINES } from '@contentful/rich-text-types';
 import { RichTextContent } from '@/types/contentful';
 // import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Image from "next/image";
+import Link from 'next/link';
 
 interface RichTextRendererProps {
   content: RichTextContent;
@@ -94,6 +95,13 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
             return null;
         }
       },
+      [INLINES.HYPERLINK]: (node: Block | Inline, children: React.ReactNode) => (
+        <Link href={node.data.uri} legacyBehavior>
+          <a target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+            {children}
+          </a>
+        </Link>
+      )
     },
   };
 
