@@ -12,6 +12,8 @@ export const generateMetadata = (): Metadata => { // Fixed syntax
     }
 };
 
+export const revalidate = 360; // Revalidate every 360 seconds
+
 const Page = async () => {
     const projects = await getAllProjects();
     // console.log(`Posts goes here ${JSON.stringify(posts)}`)
