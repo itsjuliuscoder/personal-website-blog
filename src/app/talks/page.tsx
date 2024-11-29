@@ -44,7 +44,7 @@ const Page = async () => {
         <div className="p-4 md:p-[7em]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full mb-4">
                 <div className="lg:mt-[2em] mt-[1em] w-full lg:w-3/5">  
-                    <h2 className="text-left text-lg font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[38px]">Talks</h2>
+                    <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Talks</h2>
                 </div>
                 <div className="w-full lg:w-3/5 mt-[4em]">
                     <ul className="flex list-none font-[family-name:var(--font-geist-nunito)]">
