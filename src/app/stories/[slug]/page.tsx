@@ -57,7 +57,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
                                 className="mb-8 w-full object-cover"
                             />
                         )}
-                        <h2 className="text-left text-lg font-[600] font-[family-name:var(--font-geist-poppins)] leading-[38px] text-[42px] md:text-[42px]">
+                        <h2 className="text-left text-lg font-[600] font-[family-name:var(--font-geist-poppins)] leading-[45px] text-[42px] md:text-[42px]">
                             {String(post.title)}
                         </h2>
                         <p className="mb-4 mt-2 font-[800] font-[family-name:var(--font-geist-lora)]">{String(moment(post.author.sys.createdAt).format('MMMM Do, YYYY'))}</p>
