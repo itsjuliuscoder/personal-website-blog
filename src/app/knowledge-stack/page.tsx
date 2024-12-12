@@ -25,7 +25,7 @@ const  Page = async () => {
             <div className="p-4 md:p-[7em]">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mb-4">
                     <div className="md:mt-[2em] mt-[1em] w-full md:w-3/5"> 
-                        <h2 className="text-left text-lg font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[38px]">Knowledge Stack</h2>
+                        <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Knowledge Stack</h2>
                         <p className="text-left color-[#000] text-md text-[15px] md:text-[17px] font-[400] font-[family-name:(--font-geist-lora)] mt-[1em]">...my repository of useful information on the internet.</p>
                     </div>
                     <div className="md:w-3/5 mt-[3em]">

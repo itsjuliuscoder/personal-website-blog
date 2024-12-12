@@ -39,13 +39,13 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
         <h1 className="text-4xl mt-2 font-bold mb-4 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h1>
       ),
       [BLOCKS.HEADING_2]: (node: Block | Inline, children: React.ReactNode) => (
-        <h2 className="text-3xl mt-2 font-bold mb-3 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h2>
+        <h2 className="text-3xl mt-[3em] font-bold mb-3 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h2>
       ),
       [BLOCKS.HEADING_3]: (node: Block | Inline, children: React.ReactNode) => (
         <h3 className="text-2xl mt-[2em] font-bold mb-2 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h3>
       ),
       [BLOCKS.HEADING_4]: (node: Block | Inline, children: React.ReactNode) => (
-        <h4 className="text-2xl font-bold mb-2 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h4>
+        <h4 className="text-2xl font-bold mb-2 mt-2 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h4>
       ),
       [BLOCKS.UL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
         <ul className="list-disc pl-5 mb-2 font-[family-name:var(--font-geist-poppins)] break-words">{children}</ul>
