@@ -51,7 +51,7 @@ const Page = async () => {
                 
             {posts.map((post) => (
                 <div className="text-black" key={post.sys.id}>
-                    <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]"><Link href={`/stories/${post.slug}`}>{String(post.title)}</Link></h2>
+                    <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]">{post && post.type == "article" ? <Link href={`/stories/${post.slug}`}>{String(post.title)}</Link> : <Link href={`${post.link}`} legacyBehavior><a target="_blank" rel="noopener noreferrer">{String(post.title)}</a></Link>  } </h2>
                     <p className="text-[13px] italic font-[family-name:var(--font-geist-lora)]">{String(post.excerpt)}</p>
                     {/* <div dangerouslySetInnerHTML={{ __html: post.fields.body }} /> */}
                 </div>
