@@ -12,6 +12,8 @@ export const generateMetadata = async ({ params }: { params: { slug: string } })
     console.log(`This is params ${JSON.stringify(params)}`)
     const post = await getPostBySlug(params.slug);
 
+    console.log(`This is the post data --> ${post}`);
+
     return {
         title: post ? String(post.title) : "Default Title", // Use post title or a default
         description: post ? String(post.excerpt) : "Default description", // Use post description or a default

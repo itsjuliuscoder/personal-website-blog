@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { getAllPosts } from '../../lib/api'; // Your data-fetching function
 import { BlogPost } from '../../types/contentful';
 
+export const revalidate = 300; // Revalidate every 120 seconds
 
 // Update to use a function for metadata generation
 export const generateMetadata = (): Metadata => { // Fixed syntax
