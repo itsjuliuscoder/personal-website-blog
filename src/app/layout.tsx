@@ -1,5 +1,6 @@
 // "use client";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react"
 // import { useEffect } from "react";
 // import { usePathname } from "next/navigation";
 import { Playfair_Display, Nunito, Montserrat, Lora, Poppins, Raleway, Roboto_Mono  } from "next/font/google";
@@ -64,7 +65,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Julius Olajumoke - Software Engineer",
-  description: "I’m a Software Engineer based in Lagos, Nigeria, with a passion for writing software, crafting compelling stories, exploring new places, and honing my French-speaking skills.",
+  description: "I'm a Software Engineer based in Lagos, Nigeria, with a passion for writing software, crafting compelling stories, exploring new places, and honing my French-speaking skills.",
 };
 
 export default function RootLayout({
@@ -102,6 +103,7 @@ export default function RootLayout({
         }
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
