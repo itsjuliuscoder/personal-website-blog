@@ -66,6 +66,38 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Julius Olajumoke - Software Engineer",
   description: "I'm a Software Engineer based in Lagos, Nigeria, with a passion for writing software, crafting compelling stories, exploring new places, and honing my French-speaking skills.",
+  metadataBase: new URL("https://juliusolajumoke.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Julius Olajumoke - Software Engineer",
+    description: "I'm a Software Engineer based in Lagos, Nigeria, with a passion for writing software, crafting compelling stories, exploring new places, and honing my French-speaking skills.",
+    url: "https://juliusolajumoke.com",
+    siteName: "Julius Olajumoke",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Julius Olajumoke - Software Engineer",
+    description: "I'm a Software Engineer based in Lagos, Nigeria, with a passion for writing software, crafting compelling stories, exploring new places, and honing my French-speaking skills.",
+    creator: "@juliusolajumoke",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "google8abd8a9e87b8613b",
+  },
 };
 
 export default function RootLayout({
