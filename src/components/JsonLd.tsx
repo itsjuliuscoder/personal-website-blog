@@ -14,7 +14,7 @@ export function PersonJsonLd() {
       "https://www.instagram.com/juliuscoder/",
       "https://twitter.com/ojuliuscoder",
     ],
-    knowsAbout: ["Fintech", "Cybersecurity", "AI", "Software Engineering", "MCP"],
+    knowsAbout: ["Fintech", "AI", "Software Engineering", "MCP"],
     worksFor: {
       "@type": "Organization",
       name: "MeekFi",
