@@ -2,14 +2,21 @@ import Link from "next/link";
 import { getAllProjects } from "@/lib/api";
 import { FaArrowLeft } from "react-icons/fa";
 import { Metadata } from "next";
+import { siteConfig } from "@/lib/seo";
 
 
-// Update to use a function for metadata generation
-export const generateMetadata = (): Metadata => { // Fixed syntax
+export const generateMetadata = (): Metadata => {
     return {
-        title: "Projects | Julius Olajumoke", 
-        description: "Projects by Julius Olajumoke",
-    }
+        title: "Projects",
+        description: "Open-source projects and products built by Julius Olajumoke, software engineer in Lagos, Nigeria.",
+        alternates: { canonical: `${siteConfig.url}/projects` },
+        openGraph: {
+            title: "Projects | Julius Olajumoke",
+            description: "Open-source projects and products built by Julius Olajumoke, software engineer in Lagos, Nigeria.",
+            url: `${siteConfig.url}/projects`,
+            type: "website",
+        },
+    };
 };
 
 export const revalidate = 360; // Revalidate every 360 seconds

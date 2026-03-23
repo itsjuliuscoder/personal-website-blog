@@ -3,15 +3,22 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Metadata } from "next";
 import { getAllPosts } from '../../lib/api'; // Your data-fetching function
 import { BlogPost } from '../../types/contentful';
+import { siteConfig } from "@/lib/seo";
 
 export const revalidate = 300; // Revalidate every 120 seconds
 
-// Update to use a function for metadata generation
-export const generateMetadata = (): Metadata => { // Fixed syntax
+export const generateMetadata = (): Metadata => {
     return {
-        title: "Stories | Julius Olajumoke", 
-        description: "Stories by Julius Olajumoke",
-    }
+        title: "Stories",
+        description: "Writing on software engineering, AI, fintech, and building products — by Julius Olajumoke.",
+        alternates: { canonical: `${siteConfig.url}/stories` },
+        openGraph: {
+            title: "Stories | Julius Olajumoke",
+            description: "Writing on software engineering, AI, fintech, and building products — by Julius Olajumoke.",
+            url: `${siteConfig.url}/stories`,
+            type: "website",
+        },
+    };
 };
 
 const Page = async () => {

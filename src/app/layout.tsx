@@ -1,6 +1,8 @@
 // "use client";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react"
+import { PersonJsonLd } from "@/components/JsonLd";
+import { siteConfig } from "@/lib/seo";
 // import { useEffect } from "react";
 // import { usePathname } from "next/navigation";
 import { Playfair_Display, Nunito, Montserrat, Lora, Poppins, Raleway, Roboto_Mono  } from "next/font/google";
@@ -64,25 +66,38 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Julius Olajumoke - Software Engineer",
-  description: "I'm a Software Engineer based in Lagos, Nigeria, with a passion for writing software, crafting compelling stories, exploring new places, and honing my French-speaking skills.",
-  metadataBase: new URL("https://juliusolajumoke.com"),
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: "%s | Julius Olajumoke",
+  },
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Julius Olajumoke - Software Engineer",
-    description: "I'm a Software Engineer based in Lagos, Nigeria, with a passion for writing software, crafting compelling stories, exploring new places, and honing my French-speaking skills.",
-    url: "https://juliusolajumoke.com",
-    siteName: "Julius Olajumoke",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Julius Olajumoke - Software Engineer",
-    description: "I'm a Software Engineer based in Lagos, Nigeria, with a passion for writing software, crafting compelling stories, exploring new places, and honing my French-speaking skills.",
-    creator: "@juliusolajumoke",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    creator: siteConfig.twitterHandle,
+    images: [siteConfig.ogImage],
   },
   robots: {
     index: true,
@@ -134,6 +149,7 @@ export default function RootLayout({
           antialiased`
         }
       >
+        <PersonJsonLd />
         {children}
         <Analytics />
       </body>

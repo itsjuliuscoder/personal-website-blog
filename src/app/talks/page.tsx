@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FaArrowLeft, FaMapMarkerAlt } from "react-icons/fa";
 import { Metadata } from "next";
 import { createClient, Asset, Entry, EntrySkeletonType } from "contentful";
+import { siteConfig } from "@/lib/seo";
 
 interface PresentationFields {
     title: string;
@@ -17,12 +18,18 @@ interface Presentation extends EntrySkeletonType {
 }
 
 
-// Update to use a function for metadata generation
-export const generateMetadata = (): Metadata => { // Fixed syntax
+export const generateMetadata = (): Metadata => {
     return {
-        title: "Talks | Julius Olajumoke", 
-        description: "Tech Talks by Julius Olajumoke",
-    }
+        title: "Talks",
+        description: "Conference talks and presentations by Julius Olajumoke at Google and other tech events across Africa.",
+        alternates: { canonical: `${siteConfig.url}/talks` },
+        openGraph: {
+            title: "Talks | Julius Olajumoke",
+            description: "Conference talks and presentations by Julius Olajumoke at Google and other tech events across Africa.",
+            url: `${siteConfig.url}/talks`,
+            type: "website",
+        },
+    };
 };
 
 const Page = async () => {

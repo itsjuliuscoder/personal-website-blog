@@ -3,16 +3,23 @@ import { FaArrowLeft } from "react-icons/fa";
 import { getAllKnowledgeStacks } from "@/lib/api";
 import { Knowledge } from "@/types/contentful";
 import { Metadata } from "next";
+import { siteConfig } from "@/lib/seo";
 
 
 export const revalidate = 120; // Revalidate every 120 seconds
 
-// Update to use a function for metadata generation
-export const generateMetadata = (): Metadata => { // Fixed syntax
+export const generateMetadata = (): Metadata => {
     return {
-        title: "Knowledge Stack | Julius Olajumoke", 
-        description: "My Knowledge Repository by Julius Olajumoke",
-    }
+        title: "Knowledge Stack",
+        description: "A curated repository of resources, tools, and reading materials in software engineering, AI, and fintech.",
+        alternates: { canonical: `${siteConfig.url}/knowledge-stack` },
+        openGraph: {
+            title: "Knowledge Stack | Julius Olajumoke",
+            description: "A curated repository of resources, tools, and reading materials in software engineering, AI, and fintech.",
+            url: `${siteConfig.url}/knowledge-stack`,
+            type: "website",
+        },
+    };
 };
 
 const  Page = async () => {

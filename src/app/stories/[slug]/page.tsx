@@ -4,19 +4,44 @@ import { FaArrowLeft } from "react-icons/fa";
 import { getPostBySlug } from "@/lib/api";
 import RichTextRenderer from "@/components/RichTextRenderer";
 import Image from 'next/image';
-import moment from 'moment'
+import moment from 'moment';
+import { siteConfig } from "@/lib/seo";
+import { ArticleJsonLd } from "@/components/JsonLd";
 
-
-// Update to use a function for metadata generation
 export const generateMetadata = async ({ params }: { params: { slug: string } }): Promise<Metadata> => {
-    console.log(`This is params ${JSON.stringify(params)}`)
     const post = await getPostBySlug(params.slug);
 
-    console.log(`This is the post data --> ${post}`);
+    if (!post) {
+        return { title: "Story Not Found" };
+    }
+
+    const title = String(post.title);
+    const description = String(post.excerpt);
+    const coverImageUrl = post.coverImage
+        ? `https:${post.coverImage.fields.file.url}`
+        : undefined;
 
     return {
-        title: post ? String(post.title) : "Default Title", // Use post title or a default
-        description: post ? String(post.excerpt) : "Default description", // Use post description or a default
+        title,
+        description,
+        alternates: { canonical: `${siteConfig.url}/stories/${params.slug}` },
+        openGraph: {
+            title,
+            description,
+            url: `${siteConfig.url}/stories/${params.slug}`,
+            type: "article",
+            publishedTime: post.sys.createdAt,
+            authors: [siteConfig.name],
+            ...(coverImageUrl && {
+                images: [{ url: coverImageUrl, width: 800, height: 400, alt: title }],
+            }),
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+            ...(coverImageUrl && { images: [coverImageUrl] }),
+        },
     };
 };
 
@@ -59,6 +84,13 @@ export default async function Post({ params }: { params: { slug: string } }) {
                                 className="mb-8 w-full object-cover"
                             />
                         )}
+                        <ArticleJsonLd
+                            title={String(post.title)}
+                            description={String(post.excerpt)}
+                            publishedAt={post.sys.createdAt}
+                            slug={slug}
+                            imageUrl={post.coverImage ? `https:${post.coverImage.fields.file.url}` : undefined}
+                        />
                         <h2 className="text-left text-lg font-[600] font-[family-name:var(--font-geist-poppins)] leading-[45px] text-[42px] md:text-[42px]">
                             {String(post.title)}
                         </h2>

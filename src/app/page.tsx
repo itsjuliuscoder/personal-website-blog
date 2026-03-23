@@ -1,4 +1,6 @@
 // app/page.tsx
+import type { Metadata } from "next";
+import { siteConfig } from "@/lib/seo";
 import Link from "next/link";
 import moment from 'moment';
 import { getAllPosts, getAllPresentation, getAllProjects } from '../lib/api'; // Your data-fetching function
@@ -7,6 +9,21 @@ import SocialMediaIcons from '@/components/SocialMediaIcons';
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 export const revalidate = 120; // Revalidate every 120 seconds
+
+export const metadata: Metadata = {
+  title: { absolute: siteConfig.title },
+  description: siteConfig.description,
+  alternates: {
+    canonical: siteConfig.url,
+  },
+  openGraph: {
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    type: "website",
+    images: [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
+  },
+};
 
 export default async function Home() {
   const posts: BlogPost[] = await getAllPosts(); // Fetch data directly
