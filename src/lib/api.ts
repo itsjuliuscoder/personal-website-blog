@@ -41,7 +41,12 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
         limit: 1,
     } as { content_type: string; 'fields.slug': string; limit: number });
 
-  return response.items[0] ? (response.items[0].fields as unknown as BlogPost) : null;
+  const item = response.items[0];
+  if (!item) return null;
+  return {
+    ...item.fields,
+    sys: item.sys,
+  } as unknown as BlogPost;
 }
 
 
