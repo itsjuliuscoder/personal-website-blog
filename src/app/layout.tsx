@@ -1,68 +1,37 @@
-// "use client";
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import {
+  IBM_Plex_Mono,
+  IBM_Plex_Sans,
+  Playfair_Display,
+} from "next/font/google";
 import { PersonJsonLd } from "@/components/JsonLd";
 import { siteConfig } from "@/lib/seo";
-// import { useEffect } from "react";
-// import { usePathname } from "next/navigation";
-import { Playfair_Display, Nunito, Montserrat, Lora, Poppins, Raleway, Roboto_Mono  } from "next/font/google";
-import localFont from "next/font/local";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
 import "./globals.css";
-// import { initGA, logPageView } from "@/lib/gtag";
 
-const geistPlayfair = Playfair_Display({
-  weight: ['400', '800'],
-  variable: "--font-geist-playfair",
-  subsets: ["latin"]
+const plexSans = IBM_Plex_Sans({
+  weight: ["300", "400", "500"],
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
-const geistRobotoMono = Roboto_Mono({
-  weight: ['400'],
-  variable: "--font-geist-roboto-mono",
-  subsets: ["latin"]
-});
-
-const geistRaleway = Raleway({
-  weight: ['400', '500', '900', '800'],
-  variable: "--font-geist-raleway",
-  subsets: ["latin"]
-});
-
-const geistPoppins = Poppins({
-  weight: ['400', '800'],
-  variable: "--font-geist-poppins",
-  subsets: ["latin"]
-});
-
-const geistLora = Lora({
+const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
-  variable: "--font-geist-lora",
-  subsets: ["latin"]
-})
-
-const geistMontserrat = Montserrat({
-  variable: "--font-giest-montserrat",
-  weight: ["100", "400"],
-  subsets: ["latin"]
-
-})
-
-const geistNunito = Nunito({
-  weight: ['200', '500'],
-  variable: "--font-geist-nunito",
-  subsets: ["latin"]
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const playfair = Playfair_Display({
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -77,11 +46,11 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: siteConfig.title,
-    description: siteConfig.description,
+    title: "Julius Olajumoke",
+    description: "Senior Software Engineer. Fintech · AI · Infrastructure.",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    locale: "en_US",
+    locale: "en_GB",
     type: "website",
     images: [
       {
@@ -120,37 +89,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-//   const pathname = usePathname();
-
-//   useEffect(() => {
-//     // Initialize Google Analytics on first load
-//     initGA();
-
-//     // Log page view on route change
-//     if (pathname) {
-//         logPageView(pathname);
-//     }
-// }, [pathname]);
-
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`
-          ${geistSans.variable} 
-          ${geistMono.variable} 
-          ${geistPlayfair.variable} 
-          ${geistNunito.variable} 
-          ${geistMontserrat.variable}
-          ${geistLora.variable}
-          ${geistPoppins.variable}
-          ${geistRaleway.variable}
-          ${geistRobotoMono.variable}
-          antialiased`
-        }
+        className={`${plexSans.variable} ${plexMono.variable} ${playfair.variable} font-sans font-normal antialiased`}
       >
-        <PersonJsonLd />
-        {children}
+        <ThemeProvider>
+          <PersonJsonLd />
+          <a href="#main" className="skipLink">
+            Skip to content
+          </a>
+          <Nav />
+          {children}
+          <Footer />
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

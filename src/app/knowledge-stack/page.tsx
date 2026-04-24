@@ -1,77 +1,107 @@
-import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa";
+import { Metadata } from "next";
 import { getAllKnowledgeStacks } from "@/lib/api";
 import { Knowledge } from "@/types/contentful";
-import { Metadata } from "next";
 import { siteConfig } from "@/lib/seo";
+import { InnerPageHeader } from "@/components/layout/InnerPageHeader";
+import { KNOWLEDGE_LINKS, KNOWLEDGE_QUOTES } from "@/content/home";
+import { plainTextFromDocument } from "@/lib/plainText";
+import styles from "./KnowledgeStackPage.module.css";
 
-
-export const revalidate = 120; // Revalidate every 120 seconds
+export const revalidate = 3600;
 
 export const generateMetadata = (): Metadata => {
-    return {
-        title: "Knowledge Stack",
-        description: "A curated repository of resources, tools, and reading materials in software engineering, AI, and fintech.",
-        alternates: { canonical: `${siteConfig.url}/knowledge-stack` },
-        openGraph: {
-            title: "Knowledge Stack | Julius Olajumoke",
-            description: "A curated repository of resources, tools, and reading materials in software engineering, AI, and fintech.",
-            url: `${siteConfig.url}/knowledge-stack`,
-            type: "website",
-        },
-    };
+  return {
+    title: "Knowledge Stack",
+    description:
+      "A curated repository of resources, tools, and reading materials in software engineering, AI, and fintech.",
+    alternates: { canonical: `${siteConfig.url}/knowledge-stack` },
+    openGraph: {
+      title: "Knowledge Stack | Julius Olajumoke",
+      description:
+        "A curated repository of resources, tools, and reading materials in software engineering, AI, and fintech.",
+      url: `${siteConfig.url}/knowledge-stack`,
+      type: "website",
+      locale: "en_GB",
+    },
+  };
 };
 
-const  Page = async () => {
+const Page = async () => {
+  const cmsItems: Knowledge[] = await getAllKnowledgeStacks();
+  const curatedUrls = new Set(KNOWLEDGE_LINKS.map((l) => l.url));
 
-    // const knowledge = 
-    const knowledge: Knowledge[] = await getAllKnowledgeStacks();
-    
-    return (
-        <>
-            <div className="p-4 md:p-[7em]">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mb-4">
-                    <div className="md:mt-[2em] mt-[1em] w-full md:w-3/5"> 
-                        <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Knowledge Stack</h2>
-                        <p className="text-left color-[#000] text-md text-[15px] md:text-[17px] font-[400] font-[family-name:(--font-geist-lora)] mt-[1em]">...my repository of useful information on the internet.</p>
-                    </div>
-                    <div className="md:w-3/5 mt-[3em]">
-                        <ul className="flex list-none font-[family-name:var(--font-geist-nunito)]">
-                            <li className="inline-block mr-12">
-                            <Link href="/" className="text-black flex">
-                            <FaArrowLeft className="mt-1 font-[100]" />&nbsp;Home
-                            </Link>
-                            </li>
-                            <li className="inline-block mr-12">
-                                <Link href="/stories" className="text-black">
-                                Stories
-                                </Link>
-                            </li>
-                            <li className="inline-block mr-12">
-                                <Link href="/projects" className="text-black">
-                                Projects
-                                </Link>
-                            </li>
-                            <li className="inline-block">
-                            <Link href="/talks" className="text-black">
-                                Talks
-                            </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="grid md:w-1/2 gap-4 mt-[5em]">
-                {knowledge.map((post) => (
-                    <ul key={post.sys.id} className="list-disc pl-5 space-y-2">
-                        <li className="text-black-500 xt-[16px] font-[family-name:var(--font-geist-poppins)]">
-                            {post.type == "link" ? <Link href={`${post.url}`} className="underline" legacyBehavior><a target="_blank" className="underline" rel="noopener noreferrer">{post.title}</a></Link> : <h4 className="text-[16px] font-[family-name:var(--font-geist-poppins)]"> {post.title}</h4> }
-                        </li>
-                    </ul>
-                ))}
-                </div>
-            </div>
-        </>
-    );
-}
+  const cmsLinks = cmsItems.filter(
+    (k) => k.type === "link" && k.url && !curatedUrls.has(k.url)
+  );
+  const cmsNonLinks = cmsItems.filter((k) => k.type !== "link");
 
-export default Page
+  return (
+    <main id="main">
+      <InnerPageHeader
+        label="Knowledge stack"
+        title="Repository"
+        description="Curated links and notes from the homepage, plus entries from the CMS."
+      />
+      <div className={styles.content}>
+        <h2 className={styles.blockTitle}>Links</h2>
+        <ul className={styles.list}>
+          {KNOWLEDGE_LINKS.map((l) => (
+            <li key={l.url} className={styles.listItem}>
+              <a
+                href={l.url}
+                className={styles.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {l.title}
+              </a>
+            </li>
+          ))}
+          {cmsLinks.map((k) => (
+            <li key={k.sys.id} className={styles.listItem}>
+              <a
+                href={k.url}
+                className={styles.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {k.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <h2 className={styles.blockTitleSpaced}>Quotes</h2>
+        {KNOWLEDGE_QUOTES.map((q) => (
+          <figure key={q.author}>
+            <blockquote className={styles.quote}>
+              <span className="sr-only">Quote attributed to {q.author}</span>
+              <cite>— {q.author}</cite>
+            </blockquote>
+          </figure>
+        ))}
+
+        {cmsNonLinks.length > 0 ? (
+          <>
+            <p className={styles.subLabel}>From the archive</p>
+            {cmsNonLinks.map((k) => {
+              const body =
+                String(k.description ?? "").trim() ||
+                plainTextFromDocument(k.source);
+              return (
+                <figure key={k.sys.id}>
+                  <blockquote className={styles.quote}>
+                    {body ? <span>{body}</span> : null}
+                    <cite>— {k.title}</cite>
+                  </blockquote>
+                </figure>
+              );
+            })}
+          </>
+        ) : null}
+      </div>
+    </main>
+  );
+};
+
+export default Page;

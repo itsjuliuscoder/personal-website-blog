@@ -5,19 +5,23 @@ export function PersonJsonLd() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: siteConfig.name,
-    url: siteConfig.url,
     jobTitle: "Senior Software Engineer",
+    url: siteConfig.url,
     description: siteConfig.description,
     sameAs: [
+      "https://linkedin.com/in/julius-olajumoke",
       "https://github.com/itsjuliuscoder",
-      "https://www.linkedin.com/in/julius-olajumoke",
+      "https://twitter.com/juliusolajumoke",
       "https://www.instagram.com/juliuscoder/",
-      "https://twitter.com/ojuliuscoder",
     ],
-    knowsAbout: ["Fintech", "AI", "Software Engineering", "MCP"],
     worksFor: {
       "@type": "Organization",
       name: "MeekFi",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Lagos",
+      addressCountry: "NG",
     },
   };
 

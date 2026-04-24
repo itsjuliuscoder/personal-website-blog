@@ -1,0 +1,81 @@
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding: 0 3rem 5rem;
+  }
+}
+
+.blockTitle {
+  font-family: var(--font-sans), "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 1rem;
+}
+
+.blockTitleSpaced {
+  font-family: var(--font-sans), "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 2.5rem 0 1rem;
+}
+
+.list {
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  border-top: 0.5px solid var(--border);
+}
+
+.listItem {
+  border-bottom: 0.5px solid var(--border);
+}
+
+.link {
+  display: block;
+  font-family: var(--font-mono), "IBM Plex Mono", monospace;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.65rem 0;
+}
+
+.link:hover {
+  text-decoration: underline;
+  color: var(--text-primary);
+}
+
+.quote {
+  font-family: var(--font-display), "Playfair Display", serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 1.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--border-strong);
+}
+
+.quote cite {
+  font-family: var(--font-sans), "IBM Plex Sans", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.subLabel {
+  font-family: var(--font-mono), "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 2rem 0 0.75rem;
+}

@@ -33,25 +33,25 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
     },
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node: Block | Inline, children: React.ReactNode) => (
-        <p className="pt-2 mt-1 text-md font-[family-name:var(--font-geist-poppins)]">{children}</p>
+        <p className="pt-2 mt-1 text-md font-sans">{children}</p>
       ),
       [BLOCKS.HEADING_1]: (node: Block | Inline, children: React.ReactNode) => (
-        <h1 className="text-4xl mt-2 font-bold mb-4 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h1>
+        <h1 className="text-4xl mt-2 font-medium mb-4 font-sans break-words">{children}</h1>
       ),
       [BLOCKS.HEADING_2]: (node: Block | Inline, children: React.ReactNode) => (
-        <h2 className="text-3xl mt-[2em] font-bold mb-3 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h2>
+        <h2 className="text-3xl mt-[2em] font-medium mb-3 font-sans break-words">{children}</h2>
       ),
       [BLOCKS.HEADING_3]: (node: Block | Inline, children: React.ReactNode) => (
-        <h3 className="text-2xl mt-[2em] font-bold mb-2 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h3>
+        <h3 className="text-2xl mt-[2em] font-medium mb-2 font-sans break-words">{children}</h3>
       ),
       [BLOCKS.HEADING_4]: (node: Block | Inline, children: React.ReactNode) => (
-        <h4 className="text-2xl font-bold mb-2 mt-2 font-[family-name:var(--font-geist-poppins)] break-words">{children}</h4>
+        <h4 className="text-2xl font-medium mb-2 mt-2 font-sans break-words">{children}</h4>
       ),
       [BLOCKS.UL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
-        <ul className="list-disc pl-5 mb-2 font-[family-name:var(--font-geist-poppins)] break-words">{children}</ul>
+        <ul className="list-disc pl-5 mb-2 font-sans break-words">{children}</ul>
       ),
       [BLOCKS.OL_LIST]: (node: Block | Inline, children: React.ReactNode) => (
-        <ol className="list-decimal pl-5 mb-2 pt-[2em] font-[family-name:var(--font-geist-poppins)] break-words">{children}</ol>
+        <ol className="list-decimal pl-5 mb-2 pt-[2em] font-sans break-words">{children}</ol>
       ),
       [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
         const { file, title } = node.data.target.fields;
@@ -97,7 +97,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = ({ content }) => {
       },
       [INLINES.HYPERLINK]: (node: Block | Inline, children: React.ReactNode) => (
         <Link href={node.data.uri} legacyBehavior>
-          <a target="_blank" rel="noopener noreferrer" className="text-gray-800 underline">
+          <a target="_blank" rel="noopener noreferrer" className="text-foreground underline">
             {children}
           </a>
         </Link>

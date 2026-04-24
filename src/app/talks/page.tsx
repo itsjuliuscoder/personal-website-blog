@@ -1,106 +1,76 @@
 import Link from "next/link";
-import { FaArrowLeft, FaMapMarkerAlt } from "react-icons/fa";
 import { Metadata } from "next";
-import { createClient, Asset, Entry, EntrySkeletonType } from "contentful";
+import { getAllPresentation } from "@/lib/api";
+import { Presentation } from "@/types/contentful";
 import { siteConfig } from "@/lib/seo";
+import { InnerPageHeader } from "@/components/layout/InnerPageHeader";
+import styles from "./TalksPage.module.css";
 
-interface PresentationFields {
-    title: string;
-    description: string;
-    file: Asset; // Assuming the file is an Asset type in Contentful
-    slug: string; // Added slug field
-    location: string;
-}
-
-interface Presentation extends EntrySkeletonType {
-    contentTypeId: 'talks';
-    fields: PresentationFields;
-}
-
+export const revalidate = 3600;
 
 export const generateMetadata = (): Metadata => {
-    return {
-        title: "Talks",
-        description: "Conference talks and presentations by Julius Olajumoke at Google and other tech events across Africa.",
-        alternates: { canonical: `${siteConfig.url}/talks` },
-        openGraph: {
-            title: "Talks | Julius Olajumoke",
-            description: "Conference talks and presentations by Julius Olajumoke at Google and other tech events across Africa.",
-            url: `${siteConfig.url}/talks`,
-            type: "website",
-        },
-    };
+  return {
+    title: "Talks",
+    description:
+      "Conference talks and presentations by Julius Olajumoke at Google and other tech events across Africa.",
+    alternates: { canonical: `${siteConfig.url}/talks` },
+    openGraph: {
+      title: "Talks | Julius Olajumoke",
+      description:
+        "Conference talks and presentations by Julius Olajumoke at Google and other tech events across Africa.",
+      url: `${siteConfig.url}/talks`,
+      type: "website",
+      locale: "en_GB",
+    },
+  };
 };
 
-const Page = async () => {
-
-    // Create Contentful client
-    const client = createClient({
-        space: process.env.CONTENTFUL_SPACE_ID!,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
-    });
-
-    // Fetch all presentations from Contentful
-    const presentations = await client.getEntries<Presentation>({
-        content_type: 'talks', // Changed from 'talks' to 'presentation'
-    });
-
-    // console.log(`This is the location ${JSON.stringify(presentations.items[0].fields.location)}`)
-    
-    return(
-        <div className="p-4 md:p-[7em]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full mb-4">
-                <div className="lg:mt-[2em] mt-[1em] w-full lg:w-3/5">  
-                    <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Talks</h2>
-                </div>
-                <div className="w-full lg:w-3/5 mt-[4em]">
-                    <ul className="flex list-none font-[family-name:var(--font-geist-nunito)]">
-                        <li className="inline-block mr-5">
-                            <Link href="/" className="text-black flex">
-                            <FaArrowLeft className="mt-1 font-[100]" />&nbsp;Home
-                            </Link>
-                        </li>
-                        <li className="inline-block mr-5">
-                            <Link href="/knowledge-stack" className="text-black">
-                                Knowledge Stack
-                            </Link>
-                        </li>
-                        <li className="inline-block mr-5">
-                            <Link href="/stories" className="text-black">
-                                Stories
-                            </Link>
-                        </li>
-                        <li className="inline-block">
-                            <Link href="/projects" className="text-black">
-                            Projects
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-[5em]">
-                
-            {presentations.items.map((presentation) => {
-                const pres = presentation as Entry<Presentation>; // Type assertion
-                return (
-                    <div className="text-black" key={pres.sys.id}>
-                        <div className="text-[13px] font-[family-name:var(--font-geist-lora)]"></div>
-                        <span className="flex items-center gap-1 w-full">
-                            <div className="text-[14px]"><FaMapMarkerAlt /> </div>
-                            <div className="text-[13px] font-[family-name:var(--font-geist-lora)]">{String(pres.fields.location)}</div>
-                        </span>
-                        <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]">
-                            <Link href={`/talks/${pres.fields.slug}`}>{String(pres.fields.title)}</Link>
-                        </h2>
-                        <p className="text-[13px] font-[family-name:var(--font-geist-lora)]">{String(pres.fields.description)}</p>
-                    </div>
-                );
-            })}
-                
-            </div>
-        </div>
-    )
-
+function yearFromEventDate(eventDate: string | undefined): string {
+  if (!eventDate) return "";
+  const d = new Date(eventDate);
+  return Number.isNaN(d.getTime()) ? "" : String(d.getFullYear());
 }
 
-export default Page
+function talkMeta(p: Presentation): string {
+  const loc = String(p.location ?? "").trim();
+  const y = yearFromEventDate(p.eventDate);
+  const parts = [loc.toUpperCase(), y].filter(Boolean);
+  return parts.join(" · ");
+}
+
+const Page = async () => {
+  const presentations = await getAllPresentation();
+
+  return (
+    <main id="main">
+      <InnerPageHeader
+        label="Talks"
+        title="Speaking"
+        description="Conference talks and presentations — mostly Google and pan-African tech events."
+      />
+      <div className={styles.content}>
+        <div className={styles.rows}>
+          {presentations.map((p) => (
+            <Link
+              key={p.sys?.id ?? p.slug}
+              href={`/talks/${p.slug}`}
+              className={styles.row}
+              prefetch={false}
+            >
+              <div>
+                <p className={styles.meta}>{talkMeta(p)}</p>
+                <h2 className={styles.title}>{String(p.title)}</h2>
+                <p className={styles.venue}>{String(p.description)}</p>
+              </div>
+              <span className={styles.arrow} aria-hidden>
+                ↗
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default Page;

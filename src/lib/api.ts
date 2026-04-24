@@ -51,12 +51,15 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
 
 export async function getAllPresentation(): Promise<Presentation[]> {
-    // Fetch all presentations from Contentful
     const presentations = await client.getEntries<Presentation>({
-        content_type: 'talks', // Changed from 'talks' to 'presentation'
+        content_type: 'talks',
+        order: ['-sys.createdAt'],
     });
-    
-    return presentations.items.map(item => item.fields as unknown as Presentation); 
+
+    return presentations.items.map(item => ({
+      ...(item.fields as Record<string, unknown>),
+      sys: item.sys,
+    } as unknown as Presentation));
 }
 
 

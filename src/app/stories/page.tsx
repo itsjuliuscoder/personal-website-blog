@@ -1,73 +1,94 @@
 import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa";
 import { Metadata } from "next";
-import { getAllPosts } from '../../lib/api'; // Your data-fetching function
-import { BlogPost } from '../../types/contentful';
+import { getAllPosts } from "@/lib/api";
+import { BlogPost } from "@/types/contentful";
 import { siteConfig } from "@/lib/seo";
+import { InnerPageHeader } from "@/components/layout/InnerPageHeader";
+import styles from "./StoriesPage.module.css";
 
-export const revalidate = 300; // Revalidate every 120 seconds
+export const revalidate = 3600;
 
 export const generateMetadata = (): Metadata => {
-    return {
-        title: "Stories",
-        description: "Writing on software engineering, AI, fintech, and building products — by Julius Olajumoke.",
-        alternates: { canonical: `${siteConfig.url}/stories` },
-        openGraph: {
-            title: "Stories | Julius Olajumoke",
-            description: "Writing on software engineering, AI, fintech, and building products — by Julius Olajumoke.",
-            url: `${siteConfig.url}/stories`,
-            type: "website",
-        },
-    };
+  return {
+    title: "Stories",
+    description:
+      "Writing on software engineering, AI, fintech, and building products — by Julius Olajumoke.",
+    alternates: { canonical: `${siteConfig.url}/stories` },
+    openGraph: {
+      title: "Stories | Julius Olajumoke",
+      description:
+        "Writing on software engineering, AI, fintech, and building products — by Julius Olajumoke.",
+      url: `${siteConfig.url}/stories`,
+      type: "website",
+      locale: "en_GB",
+    },
+  };
 };
 
-const Page = async () => {
-    const posts: BlogPost[] = await getAllPosts(); // Fetch data directly
-
-    return(
-        <div className="p-4 md:p-[7em]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full mb-4">
-                <div className="lg:mt-[2em] mt-[1em] w-full lg:w-3/5"> 
-                    <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Stories</h2>
-                </div>
-                <div className="w-full lg:w-3/5 mt-[4em]">
-                    <ul className="flex list-none font-[family-name:var(--font-geist-nunito)]">
-                        <li className="inline-block mr-5">
-                            <Link href="/" className="text-black flex">
-                                <FaArrowLeft className="mt-1 font-[100]" />&nbsp;Home
-                            </Link>
-                        </li>
-                        <li className="inline-block mr-5">
-                            <Link href="/knowledge-stack" className="text-black">
-                                Knowledge Stack
-                            </Link>
-                        </li>
-                        <li className="inline-block mr-5">
-                            <Link href="/projects" className="text-black">
-                            Projects
-                            </Link>
-                        </li>
-                        <li className="inline-block">
-                        <Link href="/talks" className="text-black">
-                            Talks
-                        </Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-[5em]">
-                
-            {posts.map((post) => (
-                <div className="text-black" key={post.sys.id}>
-                    <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]">{post && post.type == "article" ? <Link href={`/stories/${post.slug}`}>{String(post.title)}</Link> : <Link href={`${post.link}`} legacyBehavior><a target="_blank" rel="noopener noreferrer">{String(post.title)}</a></Link>  } </h2>
-                    <p className="text-[13px] italic font-[family-name:var(--font-geist-lora)]">{String(post.excerpt)}</p>
-                    {/* <div dangerouslySetInnerHTML={{ __html: post.fields.body }} /> */}
-                </div>
-            ))}
-            </div>
-        </div>
-    )
-
+function formatDate(iso: string): string {
+  try {
+    return new Date(iso).toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  } catch {
+    return iso;
+  }
 }
 
-export default Page
+const Page = async () => {
+  const posts: BlogPost[] = await getAllPosts();
+
+  return (
+    <main id="main">
+      <InnerPageHeader
+        label="Stories"
+        title="Writing"
+        description="Essays and notes on software engineering, AI, fintech, and building products."
+      />
+      <div className={styles.content}>
+        <div className={styles.rows}>
+          {posts.map((post) => {
+            const isArticle = post.type === "article";
+            const href = isArticle ? `/stories/${post.slug}` : post.link;
+            const inner = (
+              <>
+                <p className={styles.date}>{formatDate(post.sys.createdAt)}</p>
+                <h2 className={styles.title}>{String(post.title)}</h2>
+                <p className={styles.excerpt}>{String(post.excerpt)}</p>
+              </>
+            );
+
+            if (isArticle) {
+              return (
+                <Link
+                  key={post.sys.id}
+                  href={href}
+                  className={styles.row}
+                  prefetch={false}
+                >
+                  {inner}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={post.sys.id}
+                href={href}
+                className={styles.row}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {inner}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default Page;

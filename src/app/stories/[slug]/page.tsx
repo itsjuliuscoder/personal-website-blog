@@ -60,11 +60,11 @@ export default async function Post({ params }: { params: { slug: string } }) {
     // console.log(`This is the post image https:${post.coverImage ? ((post.coverImage.fields.file.url)): ""}`)
    
     return (
-        <div className="p-4 md:px-[7em] md:py-[5em]">
+        <div className="legacyPage">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full mb-4">
                 <div className="md:mt-[2em] mt-[1em] w-full"> 
                     <span className="flex">
-                        <Link href="/" className="text-black flex">
+                        <Link href="/" className="text-foreground flex">
                             <FaArrowLeft className="mt-1 font-[100]" />&nbsp;Home
                         </Link>
                     </span>
@@ -91,10 +91,10 @@ export default async function Post({ params }: { params: { slug: string } }) {
                             slug={slug}
                             imageUrl={post.coverImage ? `https:${post.coverImage.fields.file.url}` : undefined}
                         />
-                        <h2 className="text-left text-lg font-[600] font-[family-name:var(--font-geist-poppins)] leading-[45px] text-[42px] md:text-[42px]">
+                        <h2 className="text-left text-[clamp(24px,4vw,42px)] font-medium font-sans leading-tight">
                             {String(post.title)}
                         </h2>
-                        <p className="mb-4 mt-2 font-[800] font-[family-name:var(--font-geist-lora)]">{String(moment(post.sys.createdAt).format('MMMM Do, YYYY'))}</p>
+                        <p className="mb-4 mt-2 font-mono text-xs text-text-tertiary">{String(moment(post.sys.createdAt).format('MMMM Do, YYYY'))}</p>
                         <RichTextRenderer content={post.content} /> 
                     </div>
                 </div>

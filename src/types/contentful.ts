@@ -79,6 +79,8 @@ interface Image {
 
 export interface Presentation extends EntrySkeletonType {
   contentTypeId: 'talks';
+  /** Present when merged from `getAllPresentation()` */
+  sys?: Sys;
   title: string;
   description: string;
   slug: string; // Added slug field

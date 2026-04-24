@@ -1,0 +1,12 @@
+.shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 3rem;
+  border-bottom: 0.5px solid var(--border);
+}
+
+@media (max-width: 767px) {
+  .shell {
+    padding: 3rem 1.5rem;
+  }
+}

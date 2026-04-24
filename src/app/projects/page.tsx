@@ -1,75 +1,72 @@
-import Link from "next/link";
-import { getAllProjects } from "@/lib/api";
-import { FaArrowLeft } from "react-icons/fa";
 import { Metadata } from "next";
+import { getAllProjects } from "@/lib/api";
+import { Projects } from "@/types/contentful";
 import { siteConfig } from "@/lib/seo";
+import { InnerPageHeader } from "@/components/layout/InnerPageHeader";
+import { plainTextFromDocument } from "@/lib/plainText";
+import styles from "./ProjectsPage.module.css";
 
+export const revalidate = 3600;
 
 export const generateMetadata = (): Metadata => {
-    return {
-        title: "Projects",
-        description: "Open-source projects and products built by Julius Olajumoke, software engineer in Lagos, Nigeria.",
-        alternates: { canonical: `${siteConfig.url}/projects` },
-        openGraph: {
-            title: "Projects | Julius Olajumoke",
-            description: "Open-source projects and products built by Julius Olajumoke, software engineer in Lagos, Nigeria.",
-            url: `${siteConfig.url}/projects`,
-            type: "website",
-        },
-    };
+  return {
+    title: "Projects",
+    description:
+      "Open-source projects and products built by Julius Olajumoke, software engineer in Lagos, Nigeria.",
+    alternates: { canonical: `${siteConfig.url}/projects` },
+    openGraph: {
+      title: "Projects | Julius Olajumoke",
+      description:
+        "Open-source projects and products built by Julius Olajumoke, software engineer in Lagos, Nigeria.",
+      url: `${siteConfig.url}/projects`,
+      type: "website",
+      locale: "en_GB",
+    },
+  };
 };
 
-export const revalidate = 360; // Revalidate every 360 seconds
-
-const Page = async () => {
-    const projects = await getAllProjects();
-    // console.log(`Posts goes here ${JSON.stringify(posts)}`)
-    return(
-        <div className="p-4 md:p-[7em]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 w-full mb-4">
-                <div className="lg:mt-[2em] mt-[1em] w-full lg:w-3/5"> 
-                    <h2 className="text-left font-[800] font-[family-name:var(--font-geist-playfair)] text-[38px] md:text-[42px]">Projects</h2>
-                </div>
-                <div className="w-full lg:w-3/5 mt-[4em]">
-                    <ul className="flex list-none font-[family-name:var(--font-geist-nunito)]">
-                        <li className="inline-block mr-5">
-                            <Link href="/" className="text-black flex">
-                            <FaArrowLeft className="mt-1 font-[100]" />&nbsp;Home
-                            </Link>
-                        </li>
-                        <li className="inline-block mr-5">
-                            <Link href="/knowledge-stack" className="text-black">
-                                Knowledge Stack
-                            </Link>
-                        </li>
-                        <li className="inline-block mr-5">
-                            <Link href="/stories" className="text-black">
-                                Stories
-                            </Link>
-                        </li>
-                        <li className="inline-block">
-                            <Link href="/talks" className="text-black">
-                            Talks
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-[5em]">
-                
-            {projects.map((project) => (
-                <div className="text-black p-4" key={project.slug}>
-                    <h2 className="text-[16px] font-[700] mt-2 font-[family-name:var(--font-geist-poppins)]">{String(project.title)}</h2>
-                    <p className="text-[13px] italic font-[family-name:var(--font-geist-lora)]">{String(project.excerpt)}</p>
-                    <h6 className="text-[13px] font-[600] font-[family-name:var(--font-geist-lora)]"><Link href={`${project.source}`} legacyBehavior><a target="_blank" rel="noopener noreferrer">Link or Source</a></Link></h6>
-                    {/* <div dangerouslySetInnerHTML={{ __html: post.fields.body }} /> */}
-                </div>
-            ))}
-                
-            </div>
-        </div>
-    )
-
+function tagFromSource(source: string): string {
+  const s = source.trim();
+  if (!s) return "PROJECT";
+  return s.replace(/^https?:\/\//i, "").split("/")[0]?.toUpperCase() ?? "PROJECT";
 }
 
-export default Page
+const Page = async () => {
+  const projects = await getAllProjects();
+
+  return (
+    <main id="main">
+      <InnerPageHeader
+        label="Projects"
+        title="Shipped work"
+        description="Products and open experiments — links go to demos, repos, or live apps."
+      />
+      <div className={styles.content}>
+        <div className={styles.grid}>
+          {projects.map((project: Projects) => {
+            const excerpt = plainTextFromDocument(project.excerpt);
+            return (
+              <article key={project.slug} className={styles.card}>
+                <span className={styles.tag}>{tagFromSource(project.source)}</span>
+                <h2 className={styles.name}>{String(project.title)}</h2>
+                <p className={styles.desc}>
+                  {excerpt || "—"}
+                </p>
+                <a
+                  href={project.source}
+                  className={styles.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View project →
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default Page;

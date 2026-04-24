@@ -1,5 +1,8 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/api";
+import { siteConfig } from "@/lib/seo";
+
+const base = siteConfig.url;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
@@ -7,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const storyEntries: MetadataRoute.Sitemap = posts
     .filter((p) => p.type === "article" && p.slug)
     .map((p) => ({
-      url: `https://www.juliusolajumoke.com/stories/${String(p.slug)}`,
+      url: `${base}/stories/${String(p.slug)}`,
       lastModified: new Date(p.sys.updatedAt),
       changeFrequency: "monthly" as const,
       priority: 0.8,
@@ -15,31 +18,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: "https://www.juliusolajumoke.com",
+      url: base,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: "https://www.juliusolajumoke.com/stories",
+      url: `${base}/stories`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: "https://www.juliusolajumoke.com/talks",
+      url: `${base}/talks`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: "https://www.juliusolajumoke.com/projects",
+      url: `${base}/projects`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: "https://www.juliusolajumoke.com/knowledge-stack",
+      url: `${base}/knowledge-stack`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
