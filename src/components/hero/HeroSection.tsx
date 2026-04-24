@@ -7,7 +7,9 @@ export function HeroSection() {
     <section className={styles.section} aria-label="Introduction">
       <div className={styles.grid}>
         <div>
-          <p className="heroEyebrow">Senior Software Engineer</p>
+          <p className="heroEyebrow">
+            Senior Software Engineer & Technology Entrepreneur
+          </p>
           <h1 className={styles.headline}>
             Building at the intersection of fintech, AI &amp;{" "}
             <em>scalable infrastructure.</em>

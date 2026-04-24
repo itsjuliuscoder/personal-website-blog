@@ -5,7 +5,7 @@ export function PersonJsonLd() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: siteConfig.name,
-    jobTitle: "Senior Software Engineer",
+    jobTitle: "Senior Software Engineer & Technology Entrepreneur",
     url: siteConfig.url,
     description: siteConfig.description,
     sameAs: [
