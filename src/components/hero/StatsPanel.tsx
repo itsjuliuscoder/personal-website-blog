@@ -3,7 +3,7 @@ import styles from "./StatsPanel.module.css";
 const STATS = [
   { label: "Experience", value: "6+ Years in fintech" },
   { label: "Press", value: "4+ Press features" },
-  { label: "Speaking", value: "3+ Google talks" },
+  { label: "Speaking", value: "2+ Google talks" },
   { label: "Founder", value: "2 Founded companies" },
 ] as const;
 

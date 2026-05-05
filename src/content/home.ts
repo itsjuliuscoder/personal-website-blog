@@ -81,7 +81,7 @@ export const EXPERTISE_ITEMS: ExpertiseEntry[] = [
   },
   {
     number: "02",
-    title: "AI & Prompt Engineering",
+    title: "Artificial Intelligence",
     description:
       "Practical LLM workflows, evaluation, and safe production patterns for AI features.",
   },

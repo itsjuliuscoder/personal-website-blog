@@ -21,7 +21,7 @@ export function Nav() {
     <header className={styles.header}>
       <nav className={styles.inner} aria-label="Primary">
         <Link href="/" className={styles.brand}>
-          Julius Olajumoke
+          JO
         </Link>
 
         <div className={styles.center} role="navigation" aria-label="Section links">
