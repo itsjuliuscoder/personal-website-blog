@@ -19,7 +19,7 @@
 
 .brand {
   font-family: var(--font-sans), "IBM Plex Sans", sans-serif;
-  font-size: 14px;
+  font-size: 36px;
   font-weight: 500;
   color: var(--text-primary);
   text-decoration: none;
