@@ -16,10 +16,11 @@ export function HeroSection() {
           </h1>
           <p className={styles.body}>
             Senior Software Engineer and Technology Entrepreneur based in Lagos,
-            Nigeria. I work with teams building regulated fintech products,
-            AI-powered systems, and reliable infrastructure at scale — and I
-            speak at conferences about what it takes to ship safely in the real
-            world.
+            Nigeria. I work with teams building innovative fintech platforms,
+            AI-powered solutions, and scalable infrastructure used in real-world
+            environments. I collaborate with teams solving complex engineering
+            challenges and regularly speak at technology conferences on building
+            secure, reliable, and production-ready systems at scale.
           </p>
           <div className={styles.ctaRow}>
             <ButtonLink

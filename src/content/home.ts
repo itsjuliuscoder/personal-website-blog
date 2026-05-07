@@ -75,9 +75,9 @@ export const PRESS_ITEMS: PressEntry[] = [
 export const EXPERTISE_ITEMS: ExpertiseEntry[] = [
   {
     number: "01",
-    title: "Fintech Engineering",
+    title: "Financial Technology",
     description:
-      "Regulated payments, ledgers, and reliability patterns for money-moving systems.",
+      "Specializing in regulated payment architectures, scalable mobile money infrastructures and reliability of large-scale financial systems.",
   },
   {
     number: "02",
@@ -89,13 +89,13 @@ export const EXPERTISE_ITEMS: ExpertiseEntry[] = [
     number: "03",
     title: "Backend & Infrastructure",
     description:
-      "APIs, data pipelines, cloud operations, and performance under real-world load.",
+      "APIs, data pipelines, cloud operations, and performance under real-world workload.",
   },
   {
     number: "04",
     title: "Engineering Leadership",
     description:
-      "Hiring, delivery cadence, and technical direction for high-stakes product teams.",
+      "Driving technical excellence and operational speed for high-stakes teams through strategic hiring, streamlined delivery cycles, and clear technical roadmaps.",
   },
   {
     number: "05",
@@ -106,6 +106,13 @@ export const EXPERTISE_ITEMS: ExpertiseEntry[] = [
 ];
 
 export const TALK_ITEMS: TalkEntry[] = [
+  {
+    year: "2026",
+    meta: "DEEPER LIFE YOUNG ADULTS CONFERENCE · LAGOS, NIGERIA · 2026",
+    title: "AI Masterclass",
+    venue: "Shonibare District Church, Nigeria",
+    href: "/talks/ai-is-a-tool-that-you-should-be-using",
+  },
   {
     year: "2025",
     meta: "GOOGLE PRODUCT DEVELOPMENT CENTRE · NAIROBI, KENYA · 2025",
