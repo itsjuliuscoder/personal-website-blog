@@ -107,13 +107,6 @@ export const EXPERTISE_ITEMS: ExpertiseEntry[] = [
 
 export const TALK_ITEMS: TalkEntry[] = [
   {
-    year: "2026",
-    meta: "DEEPER LIFE YOUNG ADULTS CONFERENCE · LAGOS, NIGERIA · 2026",
-    title: "AI Masterclass",
-    venue: "Shonibare District Church, Nigeria",
-    href: "/talks/ai-is-a-tool-that-you-should-be-using",
-  },
-  {
     year: "2025",
     meta: "GOOGLE PRODUCT DEVELOPMENT CENTRE · NAIROBI, KENYA · 2025",
     title:
